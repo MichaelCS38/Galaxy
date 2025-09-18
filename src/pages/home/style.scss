@@ -1,0 +1,530 @@
+:root {
+    --background-light: #fce4ec;
+    /* Light pink background */
+    --background-surface: #ffffff;
+    /* White for panels */
+    --background-panel: #f8f9fa;
+    /* Slightly off-white */
+    --border-color: #e0e0e0;
+    /* Light grey border */
+    --text-primary: #121212;
+    /* Dark text for readability */
+    --text-primary-on-pink: #ffffff;
+    /* White text on pink buttons */
+    --text-secondary: #5f6368;
+    /* Grey for secondary text */
+    --text-tertiary: #9aa0a6;
+    /* Lighter grey */
+    --color-green: #089981;
+    --color-red: #f23645;
+    --color-primary: #e91e63;
+    /* Main pink accent color */
+}
+
+body {
+    background-color: var(--background-light);
+    color: var(--text-primary);
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+.trading-app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* --- Header --- */
+.app-header {
+    background-color: var(--background-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.app-header .logo {
+    color: var(--color-primary);
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 24px;
+}
+
+.app-header .ant-menu {
+    background: transparent;
+    border-bottom: none;
+    height: 60px;
+    line-height: 60px;
+    flex-grow: 1;
+}
+
+.app-header .ant-menu-item,
+.app-header .ant-menu-submenu-title {
+    color: var(--text-secondary);
+}
+
+.app-header .ant-menu-item-selected .ant-menu-title-content,
+.app-header .ant-menu-item:hover .ant-menu-title-content {
+    color: var(--color-primary) !important;
+}
+
+.app-header .ant-menu-item-selected,
+.app-header .ant-menu-item:hover {
+    border-bottom: 2px solid var(--color-primary) !important;
+}
+
+.header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* --- Ticker Bar --- */
+.ticker-bar {
+    background-color: var(--background-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+.ticker-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticker-label {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.ticker-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.ticker-value.green {
+    color: var(--color-green);
+}
+
+.ticker-value.red {
+    color: var(--color-red);
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 280px 320px;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "chart book trade"
+        "positions positions trade";
+    gap: 8px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.right-panel {
+    grid-area: trade;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 8px;
+    min-height: 0;
+}
+
+/* --- Chart --- */
+.chart-container {
+    grid-area: chart;
+    background-color: var(--background-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.chart-toolbar {
+    padding: 8px;
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#chart-placeholder {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+}
+
+/* --- Order Book & Trades --- */
+.order-book-trades {
+    grid-area: book;
+    background-color: var(--background-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.order-book-trades .ant-tabs {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-book-trades .ant-tabs-content-holder {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.order-book-trades .ant-tabs-nav {
+    margin-bottom: 0;
+}
+
+.order-book-header,
+.trades-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.order-book-row,
+.trade-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 13px;
+    padding: 4px 12px;
+    position: relative;
+}
+
+.order-book-row .price-red,
+.trade-row .price-red {
+    color: var(--color-red);
+}
+
+.order-book-row .price-green,
+.trade-row .price-green {
+    color: var(--color-green);
+}
+
+.order-book-row .size,
+.order-book-row .sum {
+    text-align: right;
+    color: var(--text-primary);
+}
+
+.trade-row .size,
+.trade-row .time {
+    text-align: right;
+    color: var(--text-primary);
+}
+
+.order-book-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.15;
+}
+
+.order-book-bg.red {
+    background-color: var(--color-red);
+}
+
+.order-book-bg.green {
+    background-color: var(--color-green);
+}
+
+.order-book-current-price {
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--color-green);
+}
+
+/* --- Trade Panel --- */
+.trade-panel {
+    background-color: var(--background-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.trade-panel .ant-tabs-nav {
+    margin-bottom: 16px;
+}
+
+.trade-panel .ant-tabs-tab {
+    color: var(--text-secondary);
+}
+
+.trade-panel .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: var(--color-primary);
+}
+
+.trade-panel .ant-tabs-ink-bar {
+    background: var(--color-primary);
+}
+
+.trade-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.trade-panel-header .avbl {
+    color: var(--text-secondary);
+}
+
+.trade-panel-header .avbl .value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.trade-panel-header .leverage-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.trade-panel-header .leverage-actions .ant-btn {
+    padding: 0 8px;
+    font-size: 12px;
+    background-color: var(--background-panel);
+    border-color: var(--border-color);
+}
+
+.trade-panel-input-group {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.trade-panel-input-group .ant-input-number {
+    width: 100%;
+    background-color: var(--background-panel);
+    border-color: var(--border-color);
+}
+
+.trade-panel-input-group .input-label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.trade-panel-input-group .ant-input-number-input {
+    padding-left: 50px;
+}
+
+.trade-panel-input-group .input-suffix {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.trade-panel .ant-slider {
+    margin: 8px 0 16px 0;
+}
+
+.trade-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.trade-options .ant-checkbox-wrapper {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.trade-options .hidden-order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trade-info {
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.trade-info-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
+
+.trade-info-row .value {
+    color: var(--text-primary);
+}
+
+/* --- Account Panel --- */
+.account-panel {
+    background-color: var(--background-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.account-panel .panel-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.account-panel .account-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
+
+.account-panel .account-actions .ant-btn {
+    background: var(--background-panel);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.account-panel .account-actions .ant-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.account-panel .account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.account-panel .info-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
+
+.account-panel .info-row .value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.account-panel .info-row .value.green {
+    color: var(--color-green);
+}
+
+.account-panel .multi-asset-btn {
+    margin-top: 12px;
+    background: var(--background-panel);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.account-panel .multi-asset-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* --- Bottom Panel --- */
+.bottom-panel {
+    grid-area: positions;
+    background-color: var(--background-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.bottom-panel .ant-table {
+    background: transparent;
+}
+
+.bottom-panel .ant-table-thead>tr>th {
+    background: var(--background-panel);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.bottom-panel .ant-table-tbody>tr>td {
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.bottom-panel .ant-table-tbody>tr.ant-table-row:hover>td {
+    background: var(--background-light);
+}
+
+/* --- Footer --- */
+.app-footer {
+    background-color: var(--background-surface);
+    border-top: 1px solid var(--border-color);
+    padding: 0 10px;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.footer-ticker {
+    display: inline-block;
+    animation: marquee 40s linear infinite;
+}
+
+.footer-ticker-item {
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 12px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.chart-page {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-custom {
+    width: 100%;
+    height: 100%;
+}
