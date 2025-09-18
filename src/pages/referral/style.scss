@@ -1,0 +1,271 @@
+  .referral-page {
+      padding: 24px;
+      flex-grow: 1;
+      overflow-y: auto;
+      background-color: var(--background-light);
+      color: var(--text-primary);
+      padding-top: 100px;
+      height: 100vh;
+  }
+
+  .referral-main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+  }
+
+  .history-table {
+      overflow-x: auto;
+  }
+
+  .referral-main-header .title-section h1 {
+      font-size: 2.5rem;
+      font-family: 'Wix Madefor Display', sans-serif;
+      margin: 0;
+      padding-bottom: 8px;
+  }
+
+  .referral-main-header .title-section .rules-link {
+      color: var(--color-primary);
+      font-weight: 500;
+  }
+
+  .referral-illustration {
+      width: 250px;
+      height: 200px;
+      opacity: 0.8;
+  }
+
+  .referral-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+  }
+
+  .referral-card {
+      background-color: var(--background-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 24px;
+  }
+
+  .referral-card h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .referral-card h3 .date-picker {
+      font-size: 12px;
+      font-weight: 400;
+  }
+
+  .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+  }
+
+  .info-row:last-child {
+      border-bottom: none;
+  }
+
+  .info-row .label {
+      color: var(--text-secondary);
+  }
+
+  .info-row .value {
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+  }
+
+  .info-row .anticon {
+      cursor: pointer;
+      color: var(--text-secondary);
+  }
+
+  .info-row .anticon:hover {
+      color: var(--color-primary);
+  }
+
+  .invite-button {
+      margin-top: 16px;
+      height: 44px;
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+  }
+
+  .referral-history {
+      background-color: var(--background-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 24px;
+  }
+
+  .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 16px;
+  }
+
+  .history-header h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+  }
+
+  .history-header .note {
+      font-size: 12px;
+      color: var(--text-secondary);
+  }
+
+  .history-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+  }
+
+  .history-controls .ant-input-search {
+      width: 200px;
+  }
+
+  .history-controls .ant-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+  }
+
+  .referral-history .ant-table {
+      background: transparent;
+  }
+
+  .referral-history .ant-table-thead>tr>th {
+      background: var(--background-panel);
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+  }
+
+  .referral-history .ant-table-tbody>tr>td {
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-primary);
+  }
+
+  .referral-history .ant-table-tbody>tr.ant-table-row:hover>td {
+      background: var(--background-light);
+  }
+
+  /* --- Invite Modal --- */
+  .invite-friends-modal .invite-banner {
+      color: white;
+      padding: 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background-image: linear-gradient(rgba(233, 30, 99, 0.8), rgba(233, 30, 99, 0.8)), url('https://static.asterdex.com/cloud-futures/static/images/aster/bg/aster-hero.avif');
+      background-size: cover;
+      background-position: center right;
+      background-blend-mode: multiply;
+  }
+
+  .invite-banner-content {
+      flex-grow: 1;
+  }
+
+  .invite-banner-content .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      font-size: 18px;
+  }
+
+  .invite-banner-content h2 {
+      color: white;
+      font-family: 'Wix Madefor Display', sans-serif;
+      font-size: 24px;
+      margin: 16px 0;
+  }
+
+  .invite-banner-content p {
+      font-size: 14px;
+      opacity: 0.9;
+  }
+
+  .qr-code {
+      background-color: white;
+      padding: 8px;
+      border-radius: 4px;
+  }
+
+  .qr-code img {
+      display: block;
+      width: 80px;
+      height: 80px;
+  }
+
+  .invite-friends-modal .info-row {
+      padding: 16px 0;
+  }
+
+  .invite-friends-modal .social-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 16px;
+  }
+
+  .invite-friends-modal .social-icons .anticon {
+      font-size: 24px;
+      color: var(--text-secondary);
+      cursor: pointer;
+  }
+
+  .invite-friends-modal .social-icons .anticon:hover {
+      color: var(--color-primary);
+  }
+
+  @media (max-width: 992px) {
+      .referral-grid {
+          grid-template-columns: 1fr;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .referral-main-header {
+          justify-content: center;
+          margin-bottom: 0;
+      }
+
+      .referral-page {
+          padding: 16px;
+          padding-top: 80px;
+      }
+
+      .referral-main-header .title-section h1 {
+          font-size: 1.8rem;
+      }
+
+      .history-header,
+      .history-controls {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+  }

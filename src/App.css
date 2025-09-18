@@ -1,3 +1,32 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/antd/5.12.2/reset.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Wix+Madefor+Display:wght@700&display=swap');
+
+:root {
+  --background-light: #fce4ec;
+  /* Light pink background */
+  --background-surface: #ffffff;
+  /* White for panels */
+  --background-panel: #f8f9fa;
+  /* Slightly off-white */
+  --border-color: #e0e0e0;
+  /* Light grey border */
+  --border-color-input: #d1d5db;
+  /* Clearer border for inputs */
+  --text-primary: #121212;
+  /* Dark text for readability */
+  --text-primary-on-pink: #ffffff;
+  /* White text on pink buttons */
+  --text-secondary: #5f6368;
+  /* Grey for secondary text */
+  --text-tertiary: #9aa0a6;
+  /* Lighter grey */
+  --color-green: #089981;
+  --color-red: #f23645;
+  --color-primary: #f61f77;
+  /* Main pink accent color */
+  --color-disabled: #bdbdbd;
+}
+
 .App {
   text-align: center;
 }

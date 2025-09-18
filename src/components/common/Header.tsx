@@ -1,14 +1,62 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
-import { useAccount, useDisconnect, useSwitchChain, useChainId } from "wagmi";
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { Dropdown } from 'antd';
+import { useAccount, useDisconnect } from "wagmi";
+import { LogoutOutlined, SettingOutlined, ArrowRightOutlined, SyncOutlined } from '@ant-design/icons';
+import { Dropdown, Modal } from 'antd';
 import type { MenuProps } from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './style.scss';
 
+const ReferralRulesModal = ({ visible, onCancel }: any) => (
+    <Modal
+        title="Settings"
+        open={visible}
+        onCancel={onCancel}
+        footer={null}
+        className="rules-modal"
+        width={450}
+    >
+        <div className="modal-section">
+            <div className="section-title">Trade</div>
+            <div className="setting-row">
+                <span className="label">Asset Mode</span>
+                <span className="value">Multi-Asset Mode <ArrowRightOutlined /></span>
+            </div>
+            <div className="setting-row">
+                <span className="label">Position mode</span>
+                <span className="value">One-Way Mode <ArrowRightOutlined /></span>
+            </div>
+            <div className="setting-row">
+                <span className="label">Order confirmation</span>
+                <span className="value"><ArrowRightOutlined /></span>
+            </div>
+        </div>
+        <div className="modal-section">
+            <div className="section-title">Interface</div>
+            <div className="setting-row">
+                <span className="label">Trading Panel</span>
+                <span className="value"><SyncOutlined /> Reset</span>
+            </div>
+        </div>
+        <div className="modal-section">
+            <div className="section-title">Standard</div>
+            <div className="setting-row">
+                <span className="label">Language</span>
+                <span className="value">English <ArrowRightOutlined /></span>
+            </div>
+            <div className="setting-row">
+                <span className="label">Notification</span>
+            </div>
+        </div>
+    </Modal>
+);
+
 const Header = () => {
+    const [isRulesModalVisible, setIsRulesModalVisible] = useState(false);
+    const showRulesModal = () => setIsRulesModalVisible(true);
+    const handleRulesCancel = () => setIsRulesModalVisible(false);
+
     let navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -16,8 +64,6 @@ const Header = () => {
     const { disconnect } = useDisconnect();
 
     const { address } = useAccount();
-    const chainId = useChainId()
-    const { switchChainAsync } = useSwitchChain()
     const location = useLocation();
     const pathname = location.pathname;
 
@@ -36,13 +82,13 @@ const Header = () => {
     const items: MenuProps['items'] = [
         {
             label: (
-                <Link
-                    to="/portfolio"
+                <div className='logout'
+                    onClick={showRulesModal}
                 >
-                    <UserOutlined style={{ color: '#ffb300' }} /> Portfolio
-                </Link>
+                    <SettingOutlined style={{ color: '#ffb300' }} /> Setting
+                </div>
             ),
-            key: '0',
+            key: '1',
         },
         {
             type: 'divider',
@@ -62,67 +108,50 @@ const Header = () => {
     }
 
     function goToBoard() {
-        navigate('board');
+        navigate('/');
     }
 
     return (
         <header className="header">
             <div className="content-header">
                 <div className="header__left">
-                    <div className="header__logo" onClick={goToBoard}>
+                    <div
+                        style={{ cursor: 'pointer' }}
+                        className="header__logo" onClick={goToBoard}>
                         <img
-                            src="/images/logo-text.png"
+                            src="/images/logo-bapy.jpeg"
                             alt="Logo"
                             className="header__logo-img"
                         />
+                        <div className="header__logo-text">Baby Shiba</div>
+
                     </div>
                     <nav className={`header__nav ${isOpen ? "active" : ""}`}>
                         <Link
-                            to="/"
-                            className={`header__link${pathname === '/' ? ' active' : ''}`}
+                            to="/perpetual"
+                            className={`header__link${pathname === '/perpetual' ? ' active' : ''}`}
                         >
-                            Board
+                            Perpetual
                         </Link>
                         <Link
-                            to="/create-token"
-                            className={`header__link${pathname === '/create-token' ? ' active' : ''}`}
+                            to="/spot"
+                            className={`header__link${pathname === '/spot' ? ' active' : ''}`}
                         >
-                            Create token
+                            Spot
                         </Link>
                         <Link
-                            to="/ranking"
-                            className={`header__link${pathname === '/ranking' ? ' active' : ''}`}
+                            to="/portfolio"
+                            className={`header__link${pathname === '/portfolio' ? ' active' : ''}`}
                         >
-                            Ranking
+                            Portfolio
                         </Link>
                         <Link
-                            to="/advanced"
-                            className={`header__link${pathname === '/advanced' ? ' active' : ''}`}
+                            to="/referral"
+                            className={`header__link${pathname === '/referral' ? ' active' : ''}`}
                         >
-                            Advanced
-                        </Link>
-                        <Link
-                            to="#"
-                            className={`header__link${pathname === '#' ? ' active' : ''}`}
-                        >
-                            Campaign
+                            Referral
                         </Link>
 
-                        {/* Phần nội dung dưới cùng */}
-                        {isMobile ? (
-                            <div className="header__nav-bottom">
-                                <a className="header__nav-desc" href="#">
-                                    How it works?
-                                </a>
-                                <div className="header__nav-social">
-                                    <a href="#" className="header__nav-icon">
-                                        <img src="/images/telegram.png" alt="Telegram" />
-                                    </a>
-                                    <a href="#" className="header__nav-icon"><img src="/images/x.png" alt="X" /></a>
-                                    <a href="#" className="header__nav-icon"><img src="/images/discord.png" alt="Discord" /></a>
-                                </div>
-                            </div>
-                        ) : ('')}
                     </nav>
                 </div>
                 <div className="header__right">
@@ -163,6 +192,7 @@ const Header = () => {
                 {/* Overlay mờ */}
                 {isOpen && <div className="header__overlay" onClick={handleCloseMenu} />}
             </div>
+            <ReferralRulesModal visible={isRulesModalVisible} onCancel={handleRulesCancel} />
         </header>
     );
 }

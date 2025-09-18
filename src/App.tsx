@@ -16,8 +16,13 @@ import {
 import '@rainbow-me/rainbowkit/styles.css';
 
 import './App.css';
-import HomePage from './pages/home';
+import Home from './pages/home/index';
 import Main from './components/main/Main';
+import Perpetual from './pages/perpetual';
+import PortfolioPage from './pages/portfolio/index';
+import ReferralPage from './pages/referral';
+import Spot from './pages/spot';
+
 
 function App() {
 
@@ -66,7 +71,12 @@ function App() {
 
           <Main>
             <Routes>
-              <Route path='/' element={<HomePage />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/perpetual' element={<Perpetual />} />
+              <Route path='/portfolio' element={<PortfolioPage />} />
+              <Route path='/referral' element={<ReferralPage />} />
+              <Route path='/spot' element={<Spot />} />
+
               {/* <Route path='/token/:id' element={<DetailPage />} /> */}
               <Route path="*" element={<Navigate to='/' replace />} />
             </Routes>

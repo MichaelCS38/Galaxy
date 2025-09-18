@@ -1,0 +1,400 @@
+ .portfolio-page {
+     padding: 24px;
+     flex-grow: 1;
+     overflow-y: auto;
+     background-color: var(--background-light);
+     padding-top: 100px;
+     height: 100vh;
+ }
+
+ .portfolio-header {
+     margin-bottom: 24px;
+ }
+
+ .portfolio-header h1 {
+     font-size: 28px;
+     font-weight: 500;
+     margin: 0 0 8px 0;
+ }
+
+ .portfolio-header .ant-tabs-nav {
+     margin-bottom: 0;
+ }
+
+ .portfolio-header .ant-tabs-tab {
+     font-size: 16px;
+     padding: 12px 0;
+ }
+
+ .portfolio-header .ant-tabs-ink-bar {
+     background: var(--color-primary);
+ }
+
+ .portfolio-grid {
+     display: grid;
+     grid-template-columns: 300px 1fr;
+     gap: 16px;
+     grid-template-areas:
+         "balance pnl"
+         "products pnl"
+         "details details";
+ }
+
+ .portfolio-card {
+     background-color: var(--background-surface);
+     border: 1px solid var(--border-color);
+     border-radius: 8px;
+     padding: 24px;
+ }
+
+ .account-balance-card {
+     grid-area: balance;
+ }
+
+ .account-balance-card .label {
+     font-size: 14px;
+     color: var(--text-secondary);
+ }
+
+ .account-balance-card .amount {
+     font-size: 28px;
+     font-weight: 500;
+     margin: 4px 0 16px 0;
+ }
+
+ .pnl-info .info-row {
+     display: flex;
+     justify-content: space-between;
+     font-size: 14px;
+     margin-bottom: 8px;
+ }
+
+ .pnl-info .info-row .value {
+     color: var(--text-primary);
+     font-weight: 500;
+ }
+
+ .pnl-info .info-row .value.positive {
+     color: var(--color-green);
+ }
+
+ .products-card {
+     grid-area: products;
+ }
+
+ .products-card .card-title {
+     font-size: 16px;
+     font-weight: 500;
+     margin-bottom: 16px;
+ }
+
+ .products-card .info-row {
+     display: flex;
+     justify-content: space-between;
+     font-size: 14px;
+     margin-bottom: 12px;
+ }
+
+ .pnl-chart-card {
+     grid-area: pnl;
+     grid-row: 1 / span 2;
+     display: flex;
+     flex-direction: column;
+ }
+
+ .pnl-chart-card .ant-tabs-nav {
+     margin-bottom: 24px;
+ }
+
+ .pnl-chart-card .recharts-responsive-container {
+     flex-grow: 1;
+ }
+
+ .product-details-container {
+     grid-area: details;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 16px;
+ }
+
+ .product-detail-card {
+     display: flex;
+     flex-direction: column;
+     flex: 1;
+     min-width: 350px;
+ }
+
+ .product-detail-card .card-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 16px;
+ }
+
+ .product-detail-card .card-header .title {
+     font-size: 18px;
+     font-weight: 500;
+ }
+
+ .product-detail-card .card-header .action-link {
+     font-size: 14px;
+     color: var(--color-primary);
+     cursor: pointer;
+ }
+
+ .product-detail-card .card-body .info-row {
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 12px;
+ }
+
+ .product-detail-card .card-footer {
+     margin-top: auto;
+     padding-top: 16px;
+     border-top: 1px solid var(--border-color);
+ }
+
+ .product-detail-card .card-footer .action-link {
+     color: var(--text-secondary);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ /* --- Responsive Styles --- */
+ @media (max-width: 1200px) {
+     .portfolio-grid {
+         grid-template-columns: 1fr;
+         grid-template-areas:
+             "balance"
+             "products"
+             "pnl"
+             "details";
+     }
+
+     .pnl-chart-card {
+         grid-row: auto;
+     }
+ }
+
+ @media (max-width: 992px) {
+     .summary-grid {
+         grid-template-columns: repeat(2, 1fr) !important;
+     }
+
+     .summary-item:nth-child(2) {
+         border-right: none;
+         padding-right: 0;
+     }
+ }
+
+ @media (max-width: 768px) {
+     .fee-tier {
+         display: flex;
+         gap: 12px !important;
+     }
+
+     .vip-bar {
+         gap: 5px !important;
+         padding: 12px !important;
+     }
+
+     .perp-tab-content {
+         gap: 12px;
+     }
+
+     .account-balance-card .amount {
+         margin: 0;
+     }
+
+     .pnl-chart-card .ant-tabs-nav {
+         margin-bottom: 12px;
+     }
+
+     .product-detail-card .card-body .info-row {
+         margin-bottom: 0px;
+     }
+
+     .portfolio-card {
+         padding: 12px;
+     }
+
+     .portfolio-page {
+         padding: 16px;
+         padding-top: 80px;
+     }
+
+     .portfolio-header h1 {
+         font-size: 24px;
+     }
+
+     .product-detail-card {
+         min-width: 100%;
+     }
+
+     .vip-bar,
+     .summary-card-header {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 16px;
+     }
+
+     .fee-tier {
+         flex-direction: column;
+         gap: 8px;
+         align-items: flex-start;
+     }
+
+     .summary-grid {
+         grid-template-columns: 1fr !important;
+     }
+
+     .summary-item {
+         border-right: none;
+         padding-right: 0;
+         padding-bottom: 16px;
+         border-bottom: 1px solid var(--border-color);
+     }
+
+     .summary-item:last-child {
+         border-bottom: none;
+         padding-bottom: 0;
+     }
+
+ }
+
+ /* --- Perp Tab Styles --- */
+ .perp-tab-content {
+     display: flex;
+     flex-direction: column;
+     gap: 24px;
+ }
+
+ .vip-bar {
+     background-color: var(--background-surface);
+     border: 1px solid var(--border-color);
+     border-radius: 8px;
+     padding: 16px 24px;
+     display: flex;
+     gap: 50px;
+     justify-content: flex-start;
+     align-items: center;
+     flex-wrap: wrap;
+ }
+
+ .vip-level h3,
+ .fee-tier h4 {
+     margin: 0;
+     font-weight: 500;
+ }
+
+ .vip-level a {
+     font-size: 12px;
+     color: var(--text-secondary);
+ }
+
+ .fee-tier {
+     display: flex;
+     gap: 24px;
+ }
+
+ .fee-tier h4 {
+     font-size: 14px;
+     color: var(--text-secondary);
+ }
+
+ .fee-tier span {
+     font-size: 14px;
+     color: var(--text-primary);
+ }
+
+ .perp-summary-controls {
+     display: flex;
+     align-items: center;
+     gap: 16px;
+ }
+
+ .perp-summary-controls .ant-tabs-nav {
+     margin-bottom: 0;
+ }
+
+ .perp-summary-controls .ant-tabs-tab {
+     font-size: 16px;
+ }
+
+ .perp-summary-card {
+     padding: 24px;
+     background-color: var(--background-surface);
+     border-radius: 8px;
+     border: 1px solid var(--border-color);
+ }
+
+ .summary-card-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 24px;
+     flex-wrap: wrap;
+ }
+
+ .summary-card-header .title {
+     font-size: 16px;
+     font-weight: 500;
+ }
+
+ .summary-card-header .ant-btn-group {
+     display: flex;
+ }
+
+ .summary-card-header .ant-btn {
+     background-color: var(--background-panel);
+     border-color: var(--border-color);
+ }
+
+ .summary-card-header .ant-btn.active {
+     background-color: var(--background-light);
+     color: var(--color-primary);
+     border-color: var(--color-primary);
+ }
+
+ .summary-grid {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     gap: 24px;
+ }
+
+ .summary-item {
+     border-right: 1px solid var(--border-color);
+     padding-right: 24px;
+ }
+
+ .summary-item:last-child {
+     border-right: none;
+     padding-right: 0;
+ }
+
+ .summary-item .label {
+     font-size: 14px;
+     color: var(--text-secondary);
+     margin-bottom: 12px;
+ }
+
+ .summary-item .value {
+     font-size: 18px;
+     font-weight: 500;
+     margin-bottom: 8px;
+ }
+
+ .summary-item .sub-item {
+     display: flex;
+     justify-content: space-between;
+     font-size: 13px;
+ }
+
+ .summary-item .sub-item .long {
+     color: var(--color-green);
+ }
+
+ .summary-item .sub-item .short {
+     color: var(--color-red);
+ }

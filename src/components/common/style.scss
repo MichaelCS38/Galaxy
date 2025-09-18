@@ -1,12 +1,12 @@
 .header {
-    background: #000;
+    background: #f61f77;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1100;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
-    border-bottom: 1px solid #2A2A2A;
+    border-bottom: 1px solid #ff4d4f;
 
     .icon-wallet {
         width: 20px;
@@ -63,7 +63,7 @@
     }
 
     .content-header {
-        max-width: 1600px;
+        max-width: 2440px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
@@ -75,10 +75,18 @@
         z-index: 1000;
     }
 
+    .header__logo-text {
+        width: max-content;
+        font-size: 20px;
+        font-weight: 600;
+        padding-left: 5px;
+    }
+
     .header__logo-img {
-        width: 132px;
-        height: 33px;
+        width: 40px;
+        height: 40px;
         cursor: pointer;
+        border-radius: 99px;
     }
 
     &__left {
@@ -108,6 +116,7 @@
             text-decoration: none;
             position: relative;
             transition: color 0.2s;
+            font-weight: 500;
 
             &:hover,
             &.active {
@@ -125,10 +134,10 @@
     }
 
     &__wallet-btn {
-        background: #FFAA01;
+        background: #fff;
         color: #090402;
         border: none;
-        border-radius: 13px;
+        border-radius: 4px;
         padding: 8px 20px;
         font-size: 16px;
         font-weight: 600;
@@ -140,7 +149,7 @@
         align-items: center;
 
         &:hover {
-            background: #bd7f02;
+            background: #bbbb;
         }
     }
 
@@ -179,7 +188,7 @@
             flex-direction: column;
             align-items: flex-start;
             padding: 80px 0px;
-            background: #1C1E22CC;
+            background: #edb1bd52;
             border-bottom: 1px solid #2A2A2A;
             backdrop-filter: blur(20px);
             transform: translateX(100%);
@@ -204,7 +213,7 @@
 
                 &:hover,
                 &.active {
-                    color: #ffb300;
+                    color: #f61f77;
                 }
 
                 // Line trên cho item đầu tiên
@@ -261,16 +270,16 @@
         }
 
         .header__wallet-btn {
-            height: 35px;
+            height: 32px;
 
         }
 
         .header__toggle {
-            color: #FFAA01;
+            color: #fff;
             font-size: 22px;
             height: 35px;
             width: 35px;
-            border: 1px solid #FFAA01;
+            border: 1px solid #fff;
             border-radius: 13px;
         }
 
@@ -279,7 +288,7 @@
         }
 
         .header__logo {
-            margin-right: 24px;
+            margin-right: 12px;
         }
 
 
@@ -357,10 +366,10 @@
     z-index: 9999;
 
     .ant-dropdown-menu {
-        background-color: #090402;
-        border: 1px solid #2A2A2A;
+        background-color: #f61f77;
+        border: 1px solid #fce4ec;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgb(252 228 236);
     }
 
     .ant-dropdown-menu-item {
@@ -369,7 +378,7 @@
         padding: 10px 12px !important;
 
         &:hover {
-            background-color: #1C1E22 !important;
+            background-color: #df40829c !important;
             color: #ffb300 !important;
         }
     }
@@ -403,7 +412,44 @@
     bottom: -8px;
     width: 50%;
     height: 3px;
-    background: #ffb300;
+    background: #f61f77;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+}
+
+/* --- Rules Modal --- */
+.rules-modal .modal-section {
+    margin-bottom: 24px;
+}
+
+.rules-modal .section-title {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.rules-modal .setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rules-modal .setting-row:last-child {
+    border-bottom: none;
+}
+
+.rules-modal .setting-row .label {
+    font-size: 15px;
+}
+
+.rules-modal .setting-row .value {
+    font-size: 15px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.rules-modal .setting-row .value:hover {
+    color: var(--color-primary);
 }
