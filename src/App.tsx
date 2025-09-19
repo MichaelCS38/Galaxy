@@ -22,6 +22,7 @@ import Perpetual from './pages/perpetual';
 import PortfolioPage from './pages/portfolio/index';
 import ReferralPage from './pages/referral';
 import Spot from './pages/spot';
+import { TradingProvider } from './contexts/TradingContext';
 
 
 function App() {
@@ -69,18 +70,20 @@ function App() {
             overlayBlur: 'small',
           })}>
 
-          <Main>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/perpetual' element={<Perpetual />} />
-              <Route path='/portfolio' element={<PortfolioPage />} />
-              <Route path='/referral' element={<ReferralPage />} />
-              <Route path='/spot' element={<Spot />} />
+          <TradingProvider>
+            <Main>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/perpetual' element={<Perpetual />} />
+                <Route path='/portfolio' element={<PortfolioPage />} />
+                <Route path='/referral' element={<ReferralPage />} />
+                <Route path='/spot' element={<Spot />} />
 
-              {/* <Route path='/token/:id' element={<DetailPage />} /> */}
-              <Route path="*" element={<Navigate to='/' replace />} />
-            </Routes>
-          </Main>
+                {/* <Route path='/token/:id' element={<DetailPage />} /> */}
+                <Route path="*" element={<Navigate to='/' replace />} />
+              </Routes>
+            </Main>
+          </TradingProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

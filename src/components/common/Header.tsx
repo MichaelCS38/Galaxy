@@ -80,19 +80,19 @@ const Header = () => {
 
 
     const items: MenuProps['items'] = [
-        {
-            label: (
-                <div className='logout'
-                    onClick={showRulesModal}
-                >
-                    <SettingOutlined style={{ color: '#ffb300' }} /> Setting
-                </div>
-            ),
-            key: '1',
-        },
-        {
-            type: 'divider',
-        },
+        // {
+        //     label: (
+        //         <div className='logout'
+        //             onClick={showRulesModal}
+        //         >
+        //             <SettingOutlined style={{ color: '#ffb300' }} /> Setting
+        //         </div>
+        //     ),
+        //     key: '1',
+        // },
+        // {
+        //     type: 'divider',
+        // },
         {
             label: (
                 <div className='logout' onClick={handleDisconnect}>
@@ -151,6 +151,13 @@ const Header = () => {
                         >
                             Referral
                         </Link>
+                        <div
+                            style={{ cursor: 'pointer' }}
+                            onClick={showRulesModal}
+                            className={`header__link${isRulesModalVisible === true ? ' active' : ''}`}
+                        >
+                            Setting
+                        </div>
 
                     </nav>
                 </div>

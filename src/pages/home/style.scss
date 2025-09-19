@@ -1,209 +1,83 @@
-  /* --- HOMEPAGE STYLES --- */
+@keyframes gradient-x {
 
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
 
-  .homepage {
-      overflow-y: auto;
-      flex-grow: 1;
-      background-color: var(--background-panel);
-      padding-top: 65px;
-      height: 100vh;
-  }
+    50% {
+        background-position: 100% 50%;
+    }
+}
 
-  .homepage-section {
-      padding: 60px 24px;
-      //   max-width: 2440px;
-      margin: 0 auto;
-  }
+@keyframes blink-caret {
 
-  .hero-section {
-      text-align: center;
-      padding-top: 80px;
-      padding-bottom: 80px;
-      background: linear-gradient(180deg, var(--background-surface) 0%, var(--background-light) 100%);
-  }
+    from,
+    to {
+        border-color: transparent
+    }
 
-  .hero-section h1 {
-      font-family: 'Wix Madefor Display', sans-serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-  }
+    50% {
+        border-color: #f61f77;
+    }
+}
 
-  .highlight {
-      color: var(--color-primary);
-  }
+@keyframes pulse-slow {
 
-  .hero-section p {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-  }
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
 
-  .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-  }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+}
 
-  .hero-actions .ant-btn {
-      height: 44px;
-      font-size: 1rem;
-      padding: 0 24px;
-  }
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
 
-  .stats-section {
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-      background-color: var(--background-surface);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 50px 24px;
-  }
+    100% {
+        transform: translateX(-50%);
+    }
+}
 
-  .stat-item h2 {
-      font-family: 'Wix Madefor Display', sans-serif;
-      font-size: 3rem;
-      color: var(--text-primary);
-      margin: 0;
-  }
+@keyframes slow-spin-3d {
+    from {
+        transform: rotateX(10deg) rotateY(0deg);
+    }
 
-  .stat-item p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin: 0;
-  }
+    to {
+        transform: rotateX(10deg) rotateY(360deg);
+    }
+}
 
-  .features-section {
-      text-align: center;
-  }
+/* Áp dụng các animation vào class của Tailwind */
+.animate-gradient-x {
+    animation: gradient-x 5s ease infinite;
+}
 
-  .features-section .section-title {
-      font-size: 2.5rem;
-      font-family: 'Wix Madefor Display', sans-serif;
-      margin-bottom: 4rem;
-  }
+.typing-cursor {
+    border-right: .15em solid #f61f77;
+    animation: blink-caret .75s step-end infinite;
+}
 
-  .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      text-align: left;
-  }
+.pulse-slow {
+    animation: pulse-slow 4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
 
-  .feature-card {
-      background-color: var(--background-surface);
-      padding: 2rem;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-  }
+.marquee-content {
+    animation: marquee 30s linear infinite;
+}
 
-  .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-  }
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
 
-  .feature-card p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-  }
-
-  .partners-section {
-      padding: 50px 0;
-      text-align: center;
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      background-color: var(--background-surface);
-  }
-
-  .partners-section .section-title {
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-  }
-
-  .partners-logos {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 2rem;
-  }
-
-  .partners-logos img {
-      height: 50px;
-      opacity: 0.7;
-      transition: opacity 0.3s;
-      filter: invert(1);
-  }
-
-  .partners-logos img:hover {
-      opacity: 1;
-  }
-
-  .cta-section {
-      text-align: center;
-      background: linear-gradient(180deg, var(--background-light) 0%, var(--background-surface) 100%);
-  }
-
-  @media (max-width: 768px) {
-      .homepage-section {
-          padding: 40px 16px;
-      }
-
-      .hero-section h1 {
-          font-size: 2.5rem;
-      }
-
-      .hero-section p {
-          font-size: 1rem;
-      }
-
-      .hero-actions {
-          flex-direction: column;
-          align-items: center;
-      }
-
-      .hero-actions .ant-btn {
-          width: 80%;
-          max-width: 300px;
-      }
-
-      .stats-section {
-          flex-direction: column;
-          gap: 1.5rem;
-          padding: 30px 20px;
-      }
-
-      .partners-section {
-          padding: 30px 0;
-      }
-
-      .stat-item h2 {
-          font-size: 2.5rem;
-      }
-
-      .features-section .section-title {
-          font-size: 2rem;
-      }
-
-      .partners-logos {
-          gap: 1rem;
-      }
-
-      .partners-logos img {
-          height: 50px;
-      }
-
-      .feature-card {
-          padding: 1rem;
-      }
-
-      .hero-section {
-          padding: 50px 0;
-      }
-  }
+.animate-slow-spin-3d {
+    animation: slow-spin-3d 25s linear infinite;
+}

@@ -91,7 +91,7 @@ const ReferralPage = () => {
                         </div>
                         <div className="info-row">
                             <span className="label">Referral link</span>
-                            <span className="value">https://aste...xKwwF2 <CopyOutlined /></span>
+                            <span className="value">https://babyshib...xKwwF2 <CopyOutlined /></span>
                         </div>
                         <Button
                             onClick={showInviteModal}

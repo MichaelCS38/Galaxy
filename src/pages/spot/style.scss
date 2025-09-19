@@ -184,6 +184,60 @@
     margin-bottom: 0;
 }
 
+.order-book-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-light);
+}
+
+.order-book-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.order-book-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.order-book-icon:hover {
+    background-color: var(--background-surface);
+}
+
+.order-book-icon.active {
+    background-color: var(--color-primary);
+}
+
+.order-book-icon.active svg {
+    filter: brightness(0) invert(1);
+}
+
+.precision-selector {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.precision-selector:hover {
+    background-color: var(--background-surface);
+}
+
 .order-book-header,
 .trades-header {
     display: grid;

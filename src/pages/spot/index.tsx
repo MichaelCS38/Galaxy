@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Tabs, InputNumber, Slider, Checkbox, Table, Dropdown, Menu, Tag, Modal, Select, Input } from 'antd';
 import { DownOutlined, AppstoreOutlined, ArrowUpOutlined, PlusCircleOutlined, InfoCircleOutlined, SwapOutlined, CheckOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import ChartPage from './chart';
+import { useTrading } from '../../contexts/TradingContext';
 import './style.scss';
 
 // --- CSS IN-LINE ---
@@ -10,27 +11,6 @@ import './style.scss';
 
 
 // --- Data Generation ---
-const generateInitialOrderBook = (centerPrice: any, count: any, spread: any) => {
-    let sells = [];
-    let buys = [];
-    let sellSum = 0;
-    let buySum = 0;
-
-    for (let i = 0; i < count; i++) {
-        const sellPrice = centerPrice + (i + 1) * spread + (Math.random() - 0.5) * spread;
-        const sellSize = parseFloat((Math.random() * 2).toFixed(3));
-        sellSum += sellSize;
-        sells.push({ price: sellPrice, size: sellSize, sum: sellSum, id: `sell-${i}` });
-
-        const buyPrice = centerPrice - (i + 1) * spread - (Math.random() - 0.5) * spread;
-        const buySize = parseFloat((Math.random() * 2).toFixed(3));
-        buySum += buySize;
-        buys.push({ price: buyPrice, size: buySize, sum: buySum, id: `buy-${i}` });
-    }
-    return { sells: sells.sort((a, b) => a.price - b.price), buys: buys.sort((a, b) => b.price - a.price) };
-};
-
-const initialOrderBookData = generateInitialOrderBook(4595.0, 6, 0.1);
 
 const positionsColumns = [
     { title: 'Time', dataIndex: 'symbol', key: 'symbol' },
@@ -74,40 +54,61 @@ const assetsColumns = [
 
 // --- Components ---
 
-const Ticker = () => (
-    <div className="ticker-bar">
-        <Dropdown overlay={<Menu>
-            <Menu.Item key="1">BTC/USDT</Menu.Item>
-            <Menu.Item key="2">ETH/USDT</Menu.Item>
-        </Menu>}>
-            <a onClick={e => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="ETH" width="24" />
-                <span style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text-primary)' }}>Ethereum</span>
-                <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>ETHUSDT</span>
-                <DownOutlined />
-            </a>
-        </Dropdown>
-        <div className="ticker-item">
-            <div className="ticker-value green">4,594.0</div>
+const Ticker = () => {
+    const { selectedPair, setSelectedPair, availablePairs } = useTrading();
+
+    const handlePairChange = (pair: any) => {
+        setSelectedPair(pair);
+    };
+
+    const pairMenu = (
+        <Menu>
+            {availablePairs.map((pair) => (
+                <Menu.Item key={pair.symbol} onClick={() => handlePairChange(pair)}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <img src={pair.icon} alt={pair.name} width="20" />
+                        <span>{pair.name}</span>
+                        <span style={{ color: 'var(--text-secondary)' }}>{pair.symbol}</span>
+                    </div>
+                </Menu.Item>
+            ))}
+        </Menu>
+    );
+
+    return (
+        <div className="ticker-bar">
+            <Dropdown overlay={pairMenu} trigger={['click']}>
+                <a onClick={e => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <img src={selectedPair.icon} alt={selectedPair.name} width="24" />
+                    <span style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text-primary)' }}>{selectedPair.name}</span>
+                    <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{selectedPair.symbol}</span>
+                    <DownOutlined />
+                </a>
+            </Dropdown>
+            <div className="ticker-item">
+                <div className={`ticker-value ${selectedPair.change24h >= 0 ? 'green' : 'red'}`}>
+                    {selectedPair.price.toLocaleString()}
+                </div>
+            </div>
+            <div className="ticker-item">
+                <div className="ticker-label">Mark</div>
+                <div className="ticker-value">{selectedPair.markPrice.toLocaleString()}</div>
+            </div>
+            <div className="ticker-item">
+                <div className="ticker-label">Funding/Countdown</div>
+                <div className="ticker-value">{selectedPair.fundingRate} / {selectedPair.countdown}</div>
+            </div>
+            <div className="ticker-item">
+                <div className="ticker-label">24h Volume</div>
+                <div className="ticker-value">{selectedPair.volume24h}</div>
+            </div>
+            <div className="ticker-item">
+                <div className="ticker-label">Open Interest</div>
+                <div className="ticker-value">{selectedPair.openInterest}</div>
+            </div>
         </div>
-        <div className="ticker-item">
-            <div className="ticker-label">Mark</div>
-            <div className="ticker-value">4,594.9</div>
-        </div>
-        <div className="ticker-item">
-            <div className="ticker-label">Funding/Countdown</div>
-            <div className="ticker-value">0.004% / 06:44:54</div>
-        </div>
-        <div className="ticker-item">
-            <div className="ticker-label">24h Volume</div>
-            <div className="ticker-value">227.99M</div>
-        </div>
-        <div className="ticker-item">
-            <div className="ticker-label">Open Interest</div>
-            <div className="ticker-value">44.4M</div>
-        </div>
-    </div>
-);
+    );
+};
 
 
 const TradingChart = () => {
@@ -121,33 +122,22 @@ const TradingChart = () => {
 };
 
 const RecentTrades = () => {
-    const [trades, setTrades]: any = useState([]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const newTrade = {
-                price: (4595.0 + (Math.random() - 0.5) * 2).toFixed(1),
-                size: (Math.random() * 1.5).toFixed(2),
-                time: new Date().toLocaleTimeString('en-GB'),
-                type: Math.random() > 0.5 ? 'buy' : 'sell',
-                id: Date.now() + Math.random()
-            };
-            setTrades((prevTrades: any) => [newTrade, ...prevTrades.slice(0, 19)]);
-        }, 1500);
-        return () => clearInterval(interval);
-    }, []);
+    const { selectedPair, recentTrades } = useTrading();
+    
+    // Get base asset from symbol (e.g., ETH from ETHUSDT)
+    const baseAsset = selectedPair.symbol.replace('USDT', '');
 
     return (
         <div>
             <div className="trades-header">
                 <span>Price(USDT)</span>
-                <span style={{ textAlign: 'right' }}>Size(ETH)</span>
+                <span style={{ textAlign: 'right' }}>Size({baseAsset})</span>
                 <span style={{ textAlign: 'right' }}>Time</span>
             </div>
             <div>
-                {trades.map((trade: any) => (
+                {recentTrades.map((trade: any) => (
                     <div key={trade.id} className="trade-row">
-                        <div className={trade.type === 'buy' ? 'price-green' : 'price-red'}>{trade.price}</div>
+                        <div className={trade.type === 'buy' ? 'price-green' : 'price-red'}>{trade.price.toFixed(2)}</div>
                         <div className="size">{trade.size}</div>
                         <div className="time">{trade.time}</div>
                     </div>
@@ -159,88 +149,111 @@ const RecentTrades = () => {
 
 
 const OrderBook = () => {
-    const [bookData, setBookData]: any = useState(initialOrderBookData);
+    const { selectedPair, orderBookData } = useTrading();
     const [updatedRows, setUpdatedRows]: any = useState({});
+    const [showBuys, setShowBuys] = useState(true);
+    const [showSells, setShowSells] = useState(true);
+    const [precision, setPrecision] = useState(0.1);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setBookData((prevData: any) => {
-                const newSells = [...prevData.sells];
-                const newBuys = [...prevData.buys];
-                const newUpdated: any = {};
-
-                // Update a few random rows
-                for (let i = 0; i < Math.floor(Math.random() * 3) + 1; i++) {
-                    const sellIndex = Math.floor(Math.random() * newSells.length);
-                    newSells[sellIndex] = { ...newSells[sellIndex], size: parseFloat((Math.random() * 2).toFixed(3)) };
-                    newUpdated[newSells[sellIndex].id] = true;
-
-                    const buyIndex = Math.floor(Math.random() * newBuys.length);
-                    newBuys[buyIndex] = { ...newBuys[buyIndex], size: parseFloat((Math.random() * 2).toFixed(3)) };
-                    newUpdated[newBuys[buyIndex].id] = true;
-                }
-
-                // Recalculate sums
-                let sellSum = 0;
-                newSells.slice().reverse().forEach(order => {
-                    sellSum += order.size;
-                    order.sum = sellSum;
-                });
-
-                let buySum = 0;
-                newBuys.forEach(order => {
-                    buySum += order.size;
-                    order.sum = buySum;
-                });
-
-                setUpdatedRows(newUpdated);
-                setTimeout(() => setUpdatedRows({}), 500);
-
-
-                return { sells: newSells, buys: newBuys };
-            });
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const maxSellSum = bookData.sells.length > 0 ? bookData.sells.reduce((max: any, p: any) => p.sum > max ? p.sum : max, 0) : 0;
-    const maxBuySum = bookData.buys.length > 0 ? bookData.buys.reduce((max: any, p: any) => p.sum > max ? p.sum : max, 0) : 0;
+    const maxSellSum = orderBookData.sells.length > 0 ? orderBookData.sells.reduce((max: any, p: any) => p.sum > max ? p.sum : max, 0) : 0;
+    const maxBuySum = orderBookData.buys.length > 0 ? orderBookData.buys.reduce((max: any, p: any) => p.sum > max ? p.sum : max, 0) : 0;
     const maxSum = Math.max(maxSellSum, maxBuySum);
 
+    // Get base asset from symbol (e.g., ETH from ETHUSDT)
+    const baseAsset = selectedPair.symbol.replace('USDT', '');
 
     return (
-        <div className="order-book-trades">
+        <div className="order-book-trades" key={selectedPair.symbol}>
             <Tabs defaultActiveKey="1" centered>
                 <Tabs.TabPane tab="Order book" key="1">
+                    <div className="order-book-controls">
+                        <div className="order-book-icons">
+                            <div 
+                                className={`order-book-icon ${showBuys && showSells ? 'active' : ''}`}
+                                onClick={() => {
+                                    setShowBuys(true);
+                                    setShowSells(true);
+                                }}
+                                title="Show both buy and sell orders"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="2" y="2" width="12" height="6" stroke={showBuys && showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
+                                    <rect x="2" y="10" width="12" height="6" stroke={showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
+                                    <line x1="14" y1="4" x2="16" y2="4" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1"/>
+                                </svg>
+                            </div>
+                            <div 
+                                className={`order-book-icon ${showBuys && !showSells ? 'active' : ''}`}
+                                onClick={() => {
+                                    setShowBuys(true);
+                                    setShowSells(false);
+                                }}
+                                title="Show only buy orders"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="2" y="4" width="12" height="8" stroke={showBuys && !showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
+                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1"/>
+                                </svg>
+                            </div>
+                            <div 
+                                className={`order-book-icon ${!showBuys && showSells ? 'active' : ''}`}
+                                onClick={() => {
+                                    setShowBuys(false);
+                                    setShowSells(true);
+                                }}
+                                title="Show only sell orders"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="2" y="4" width="12" height="8" stroke={!showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
+                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="precision-selector">
+                            <span>{precision}</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M3 4.5L6 7.5L9 4.5" stroke="#8c8c8c" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
                     <div className="order-book-header">
                         <span>Price (USDT)</span>
-                        <span style={{ textAlign: 'right' }}>Size (ETH)</span>
-                        <span style={{ textAlign: 'right' }}>Sum (ETH)</span>
+                        <span style={{ textAlign: 'right' }}>Size ({baseAsset})</span>
+                        <span style={{ textAlign: 'right' }}>Sum ({baseAsset})</span>
                     </div>
-                    <div>
-                        {bookData.sells.slice().reverse().map((order: any) => (
-                            <div key={order.id} className={`order-book-row ${updatedRows[order.id] ? 'flash' : ''}`}>
-                                <div className="price-red">{order.price.toFixed(1)}</div>
-                                <div className="size">{order.size.toFixed(3)}</div>
-                                <div className="sum">{order.sum.toFixed(3)}</div>
-                                <div className="order-book-bg red" style={{ width: `${(order.sum / maxSum) * 100}%` }}></div>
-                            </div>
-                        ))}
+                    {showSells && (
+                        <div>
+                            {orderBookData.sells.slice().reverse().map((order: any) => (
+                                <div key={`${selectedPair.symbol}-${order.id}`} className={`order-book-row ${updatedRows[order.id] ? 'flash' : ''}`}>
+                                    <div className="price-red">{order.price.toFixed(1)}</div>
+                                    <div className="size">{order.size.toFixed(3)}</div>
+                                    <div className="sum">{order.sum.toFixed(3)}</div>
+                                    <div className="order-book-bg red" style={{ width: `${(order.sum / maxSum) * 100}%` }}></div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    <div className={`order-book-current-price ${selectedPair.change24h >= 0 ? 'green' : 'red'}`}>
+                        {selectedPair.price.toLocaleString()} <ArrowUpOutlined />
                     </div>
-                    <div className="order-book-current-price green">
-                        4,594.0 <ArrowUpOutlined />
-                    </div>
-                    <div>
-                        {bookData.buys.map((order: any) => (
-                            <div key={order.id} className={`order-book-row ${updatedRows[order.id] ? 'flash' : ''}`}>
-                                <div className="price-green">{order.price.toFixed(1)}</div>
-                                <div className="size">{order.size.toFixed(3)}</div>
-                                <div className="sum">{order.sum.toFixed(3)}</div>
-                                <div className="order-book-bg green" style={{ width: `${(order.sum / maxSum) * 100}%` }}></div>
-                            </div>
-                        ))}
-                    </div>
+                    {showBuys && (
+                        <div>
+                            {orderBookData.buys.map((order: any) => (
+                                <div key={`${selectedPair.symbol}-${order.id}`} className={`order-book-row ${updatedRows[order.id] ? 'flash' : ''}`}>
+                                    <div className="price-green">{order.price.toFixed(1)}</div>
+                                    <div className="size">{order.size.toFixed(3)}</div>
+                                    <div className="sum">{order.sum.toFixed(3)}</div>
+                                    <div className="order-book-bg green" style={{ width: `${(order.sum / maxSum) * 100}%` }}></div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </Tabs.TabPane>
                 <Tabs.TabPane tab="Trades" key="2">
                     <RecentTrades />
@@ -331,11 +344,15 @@ const AdjustLeverageModal = ({ visible, onCancel }: any) => {
 
 const { Option } = Select;
 const TradePanel = () => {
+    const { selectedPair } = useTrading();
     const [activeTab, setActiveTab] = React.useState('buy');
     const [isDepositModalVisible, setIsDepositModalVisible] = useState(false);
 
     const showDepositModal = () => setIsDepositModalVisible(true);
     const handleDepositCancel = () => setIsDepositModalVisible(false);
+
+    // Get base asset from symbol (e.g., ETH from ETHUSDT)
+    const baseAsset = selectedPair.symbol.replace('USDT', '');
 
 
     return (
@@ -361,7 +378,7 @@ const TradePanel = () => {
                             <div className="avbl-row">
                                 <span>Avbl</span>
                                 <span>
-                                    0.00 BNB <PlusCircleOutlined
+                                    0.00 {baseAsset} <PlusCircleOutlined
                                         onClick={showDepositModal}
                                         style={{ color: 'var(--color-primary)', cursor: 'pointer' }} />
                                 </span>
@@ -369,8 +386,8 @@ const TradePanel = () => {
                             <div className="input-group">
                                 <span className="input-label">Size</span>
                                 <Input placeholder='Size' />
-                                <Select defaultValue="ASTER" className="asset-selector">
-                                    <Option value="ASTER">BNB</Option>
+                                <Select defaultValue={baseAsset} className="asset-selector">
+                                    <Option value={baseAsset}>{baseAsset}</Option>
                                     <Option value="USDT">USDT</Option>
                                 </Select>
                             </div>
@@ -397,22 +414,21 @@ const TradePanel = () => {
                             <div className="avbl-row">
                                 <span>Avbl</span>
                                 <span>
-                                    0.00 BNB <PlusCircleOutlined
+                                    0.00 {baseAsset} <PlusCircleOutlined
                                         onClick={showDepositModal}
                                         style={{ color: 'var(--color-primary)', cursor: 'pointer' }} />
                                 </span>
                             </div>
                             <div className="input-group">
-                                <Input placeholder='Price' />
-                                <Select defaultValue="BNB" className="asset-selector">
-                                    <Option value="BNB">BNB</Option>
+                                <Input placeholder={selectedPair.price.toLocaleString()} />
+                                <Select defaultValue="USDT" className="asset-selector">
                                     <Option value="USDT">USDT</Option>
                                 </Select>
                             </div>
                             <div className="input-group">
                                 <Input placeholder='Size' />
-                                <Select defaultValue="USDT" className="asset-selector">
-                                    <Option value="ASTER">BNB</Option>
+                                <Select defaultValue={baseAsset} className="asset-selector">
+                                    <Option value={baseAsset}>{baseAsset}</Option>
                                     <Option value="USDT">USDT</Option>
                                 </Select>
                             </div>
@@ -439,7 +455,7 @@ const TradePanel = () => {
                             <div className="avbl-row">
                                 <span>Avbl</span>
                                 <span>
-                                    0.00 BNB <PlusCircleOutlined
+                                    0.00 {baseAsset} <PlusCircleOutlined
                                         onClick={showDepositModal}
                                         style={{ color: 'var(--color-primary)', cursor: 'pointer' }} />
                                 </span>
@@ -451,16 +467,15 @@ const TradePanel = () => {
                                 </Select>
                             </div>
                             <div className="input-group">
-                                <Input placeholder='Price' />
-                                <Select defaultValue="BNB" className="asset-selector">
-                                    <Option value="BNB">BNB</Option>
+                                <Input placeholder={selectedPair.price.toLocaleString()} />
+                                <Select defaultValue="USDT" className="asset-selector">
                                     <Option value="USDT">USDT</Option>
                                 </Select>
                             </div>
                             <div className="input-group">
                                 <Input placeholder='Size' />
-                                <Select defaultValue="USDT" className="asset-selector">
-                                    <Option value="ASTER">BNB</Option>
+                                <Select defaultValue={baseAsset} className="asset-selector">
+                                    <Option value={baseAsset}>{baseAsset}</Option>
                                     <Option value="USDT">USDT</Option>
                                 </Select>
                             </div>
