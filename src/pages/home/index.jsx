@@ -808,7 +808,17 @@ const TradingViewSection = () => {
         {
             title: "Advanced Trading, Simplified.",
             subtitle: "A professional-grade trading experience, designed to be intuitive for everyone.",
-            imgSrc: "/images/trade2.jpg"
+            imgSrc: "/images/trade3.jpeg"
+        },
+        {
+            title: "Advanced Trading, Simplified.",
+            subtitle: "A professional-grade trading experience, designed to be intuitive for everyone.",
+            imgSrc: "/images/trade2.jpeg"
+        },
+        {
+            title: "Advanced Trading, Simplified.",
+            subtitle: "A professional-grade trading experience, designed to be intuitive for everyone.",
+            imgSrc: "/images/trade4.jpeg"
         }
     ];
 
