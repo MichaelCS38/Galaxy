@@ -77,12 +77,24 @@ const PageStyles = () => (
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+        @keyframes core-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(246, 31, 119, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 35px rgba(246, 31, 119, 0.6); }
+        }
+        @keyframes spin-x {
+            from { transform: rotateX(0deg); }
+            to { transform: rotateX(360deg); }
+        }
+        @keyframes spin-y-rev {
+            from { transform: rotateY(360deg); }
+            to { transform: rotateY(0deg); }
+        }
 
 
-        /* --- Hero Section --- */
+                /* --- Hero Section --- */
         .hero-section {
             position: relative;
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -191,28 +203,95 @@ const PageStyles = () => (
             justify-content: center;
             align-items: center;
             padding: 2rem;
-            perspective: 1000px;
+            perspective: 1200px;
         }
         .sphere-3d-container {
             position: relative;
-            width: 20rem; height: 20rem;
+            width: 20rem; 
+            height: 20rem;
             transform-style: preserve-3d;
-            animation: slow-spin-3d 25s linear infinite;
+            animation: slow-spin-3d 30s linear infinite;
         }
-        .sphere-core { position: absolute; inset: 25%; display:flex; justify-content:center; align-items:center; }
-        .sphere-glow { width: 100%; height: 100%; border-radius: 9999px; background-color: rgba(244, 114, 182, 0.3); filter: blur(2rem); }
-        .sphere-logo { position: absolute; width: 6rem; height: 6rem; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        .sphere-orbit { position: absolute; border-radius: 9999px; border-style: solid; }
-        .orbit-1 { inset: 0; border-width: 2px; border-color: rgba(249, 168, 212, 0.5); animation: spin 20s linear infinite reverse; }
-        .orbit-2 { inset: 1rem; border-width: 1px; border-color: rgba(249, 168, 212, 0.6); transform: rotateX(60deg); animation: spin 15s linear infinite; }
-        .orbit-3 { inset: 2rem; border-width: 1px; border-color: rgba(249, 168, 212, 0.6); transform: rotateY(60deg) rotateX(20deg); animation: spin 25s linear infinite; }
-        .orbit-4 { inset: 0.5rem; border-top: 2px solid rgba(249, 168, 212, 0.5); border-bottom: 2px solid rgba(249, 168, 212, 0.5); transform: rotateY(90deg); animation: spin 18s linear infinite reverse; }
+        .sphere-core { 
+            position: absolute; 
+            inset: 25%; 
+            display:flex; 
+            justify-content:center; 
+            align-items:center;
+            transform-style: preserve-3d;
+        }
+        .sphere-glow { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 9999px; 
+            background-color: rgba(244, 114, 182, 0.3); 
+            filter: blur(2.5rem); 
+            position: absolute;
+            transform: translateZ(-20px);
+        }
+        .sphere-logo { 
+            position: absolute; 
+            width: 6rem; 
+            height: 6rem; 
+            border-radius: 9999px; 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+            animation: core-pulse 5s infinite ease-in-out;
+        }
+        .sphere-orbit { 
+            position: absolute; 
+            border-radius: 9999px; 
+            border-style: solid;
+            transform-style: preserve-3d;
+        }
+        .orbit-1 { 
+            inset: 0; 
+            border-width: 2px; 
+            border-color: rgba(249, 168, 212, 0.3); 
+            animation: spin-y-rev 18s linear infinite;
+            transform: rotateX(75deg);
+        }
+        .orbit-2 { 
+            inset: 0; 
+            border-width: 1px; 
+            border-color: rgba(249, 168, 212, 0.5); 
+            animation: spin-x 15s linear infinite;
+            transform: rotateY(75deg);
+        }
+        .orbit-3 { 
+            inset: 2.5rem; 
+            border-width: 1px; 
+            border-color: rgba(249, 168, 212, 0.6); 
+            border-style: dashed;
+            animation: spin 22s linear infinite reverse;
+            transform: rotateX(20deg) rotateY(30deg);
+        }
+        .orbit-4 { 
+            inset: -1rem; 
+            border-width: 1px; 
+            border-color: rgba(249, 168, 212, 0.4); 
+            animation: spin 28s linear infinite;
+            transform: rotateX(85deg) rotateY(10deg);
+        }
         
-        .sphere-satellite { position: absolute; border-radius: 9999px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); background-image: linear-gradient(to bottom right, var(--primary-color), #f472b6); }
-        .orbit-2 .sphere-satellite { top: 0; left: 50%; margin-left: -0.375rem; width: 0.75rem; height: 0.75rem; }
-        .orbit-3 .sphere-satellite { top: 50%; right: 0; margin-top: -0.25rem; width: 0.5rem; height: 0.5rem; }
-        .orbit-4 .sphere-satellite { top: 50%; left: 0; margin-top: -0.25rem; width: 0.5rem; height: 0.5rem; }
-
+        .sphere-satellite { 
+            position: absolute; 
+            border-radius: 9999px; 
+            box-shadow: 0 0 10px var(--primary-color);
+            background-image: linear-gradient(to bottom right, var(--primary-color-light), white);
+            transform-style: preserve-3d;
+        }
+        .orbit-1 .sphere-satellite { 
+            top: 50%; left: 0; margin-top: -0.5rem; width: 1rem; height: 1rem; transform: translateZ(2px); 
+        }
+        .orbit-2 .sphere-satellite { 
+            top: 0; left: 50%; margin-left: -0.375rem; width: 0.75rem; height: 0.75rem; transform: translateZ(2px);
+        }
+        .orbit-3 .sphere-satellite { 
+            bottom: 0; left: 50%; margin-left: -0.25rem; width: 0.5rem; height: 0.5rem; transform: translateZ(2px);
+        }
+        .orbit-4 .sphere-satellite { 
+            display: none;
+        }
 
         /* --- Stats Section --- */
         .stats-section {
@@ -584,9 +663,11 @@ const HeroSection = () => {
                     <div className="sphere-3d-container">
                         <div className="sphere-core">
                             <div className="sphere-glow"></div>
-                            <img src="https://placehold.co/150x150/fff5f7/f61f77?text=Baby Shiba" alt="Logo" className="sphere-logo" />
+                            <img src="https://placehold.co/100x100/fff5f7/f61f77?text=BABY SHIBA" alt="Logo" className="sphere-logo" />
                         </div>
-                        <div className="sphere-orbit orbit-1"></div>
+                        <div className="sphere-orbit orbit-1">
+                            <div className="sphere-satellite"></div>
+                        </div>
                         <div className="sphere-orbit orbit-2">
                             <div className="sphere-satellite"></div>
                         </div>
