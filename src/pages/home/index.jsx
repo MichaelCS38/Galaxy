@@ -94,7 +94,7 @@ const PageStyles = () => (
                 /* --- Hero Section --- */
         .hero-section {
             position: relative;
-            min-height: 100vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -295,7 +295,7 @@ const PageStyles = () => (
 
         /* --- Stats Section --- */
         .stats-section {
-            padding: 4rem 0;
+            padding: 2rem 0;
             background-color: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(4px);
         }
@@ -447,6 +447,54 @@ const PageStyles = () => (
             gap: 0.5rem;
         }
 
+        /* --- Trading View Section --- */
+        .trading-view-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 5rem 1rem 2rem 1rem;
+        }
+        .trading-view-content-wrapper {
+            text-align: center;
+            z-index: 10;
+            margin-bottom: 1rem;
+            max-width: 48rem;
+            min-height: 110px; 
+        }
+        .trading-view-images-container {
+            position: relative;
+            max-width: 1024px;
+            width: 90%;
+            margin: 0 auto;
+            z-index: 5;
+            aspect-ratio: 1024 / 550;
+        }
+        .trading-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 1.2s ease-in-out;
+        }
+        .trading-image-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, var(--bg-light), transparent);
+            pointer-events: none;
+        }
+        .trading-image {
+            display: block;
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(246, 31, 119, 0.1), 0 8px 10px -6px rgba(246, 31, 119, 0.1);
+        }
 
         /* --- Footer --- */
         .footer {
@@ -499,12 +547,12 @@ const PageStyles = () => (
 
         /* --- Responsive Styles --- */
         @media (min-width: 640px) { /* sm */
-            .hero-title { font-size: 3rem; }
+            .hero-title { font-size: 2.5rem; }
             .hero-buttons { flex-direction: row; }
             .community-buttons { flex-direction: row; }
         }
         @media (min-width: 768px) { /* md */
-            .hero-title { font-size: 3.75rem; }
+            .hero-title { font-size: 3rem; }
             .hero-subtitle { font-size: 1.25rem; }
             .sphere-3d-container { width: 24rem; height: 24rem; }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
@@ -519,7 +567,7 @@ const PageStyles = () => (
             .hero-subtitle { margin-left: 0; margin-right: 0; }
             .hero-buttons { justify-content: flex-start; }
             .hero-animation { width: 50%; }
-            .hero-title { font-size: 4.5rem; }
+            .hero-title { font-size: 3.2rem; }
             .stat-value { font-size: 3rem; }
             .features-grid { grid-template-columns: repeat(4, 1fr); }
         }
@@ -564,7 +612,6 @@ const DiscordIcon = () => (
     </svg>
 );
 
-
 // --- Các Custom Hook ---
 const useCountUp = (end, duration = 2000) => {
     const [count, setCount] = useState(0);
@@ -586,6 +633,7 @@ const useCountUp = (end, duration = 2000) => {
     }, [end, duration]);
     return count;
 };
+
 const useTypingEffect = (textToType, typeSpeed = 150, deleteSpeed = 100, delay = 2000) => {
     const [text, setText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
@@ -607,6 +655,7 @@ const useTypingEffect = (textToType, typeSpeed = 150, deleteSpeed = 100, delay =
     }, [text, isDeleting, textToType, typeSpeed, deleteSpeed, delay]);
     return text;
 };
+
 const useScrollAnimation = (options) => {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef(null);
@@ -632,10 +681,75 @@ const useScrollAnimation = (options) => {
     return [ref, isVisible];
 };
 
+const useTextScramble = (phrases, activeIndex) => {
+    const [displayText, setDisplayText] = useState(phrases[activeIndex]);
+    const frameRequestRef = useRef();
+    const frameRef = useRef(0);
+    const queueRef = useRef([]);
+    const prevTextRef = useRef(phrases[activeIndex]);
+    const scrambleChars = '!<>-_\\/[]{}—=+*^?#';
+
+    useEffect(() => {
+        const fromText = prevTextRef.current;
+        const toText = phrases[activeIndex];
+        const queue = [];
+
+        for (let i = 0; i < Math.max(fromText.length, toText.length); i++) {
+            const from = fromText[i] || '';
+            const to = toText[i] || '';
+            const start = Math.floor(Math.random() * 20);
+            const end = start + Math.floor(Math.random() * 20) + 10;
+            queue.push({ from, to, start, end });
+        }
+
+        queueRef.current = queue;
+        frameRef.current = 0;
+
+        const animate = () => {
+            let output = '';
+            let complete = 0;
+            for (let i = 0, n = queueRef.current.length; i < n; i++) {
+                let { from, to, start, end, char } = queueRef.current[i];
+                if (frameRef.current >= end) {
+                    complete++;
+                    output += to;
+                } else if (frameRef.current >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                        queueRef.current[i].char = char;
+                    }
+                    output += char;
+                } else {
+                    output += from;
+                }
+            }
+            setDisplayText(output);
+
+            if (complete === queueRef.current.length) {
+                prevTextRef.current = toText;
+                cancelAnimationFrame(frameRequestRef.current);
+            } else {
+                frameRef.current++;
+                frameRequestRef.current = requestAnimationFrame(animate);
+            }
+        };
+
+        cancelAnimationFrame(frameRequestRef.current);
+        frameRequestRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            cancelAnimationFrame(frameRequestRef.current);
+            prevTextRef.current = phrases[activeIndex];
+            setDisplayText(phrases[activeIndex]);
+        }
+    }, [activeIndex, phrases]);
+
+    return displayText;
+};
 
 // --- CÁC SECTION CỦA TRANG ---
 const HeroSection = () => {
-    const typedText = useTypingEffect("Decentralized Trading", 150, 100, 2000);
+    const typedText = useTypingEffect("ecentralized Trading", 150, 100, 2000);
     return (
         <section className="hero-section">
             <div className="blurry-shape shape-1"></div>
@@ -647,7 +761,7 @@ const HeroSection = () => {
                         <span className="hero-title-static">The Future Of</span>
                         <br />
                         <span className="hero-title-dynamic">
-                            {typedText}
+                            D{typedText}
                             {/* <span className="typing-cursor"></span> */}
                         </span>
                     </h1>
@@ -683,6 +797,63 @@ const HeroSection = () => {
         </section>
     );
 };
+
+const TradingViewSection = () => {
+    const sectionData = [
+        {
+            title: "Advanced Trading, Simplified.",
+            subtitle: "A professional-grade trading experience, designed to be intuitive for everyone.",
+            imgSrc: "/images/trade1.jpg"
+        },
+        {
+            title: "Advanced Trading, Simplified.",
+            subtitle: "A professional-grade trading experience, designed to be intuitive for everyone.",
+            imgSrc: "/images/trade2.jpg"
+        }
+    ];
+
+    const [activeSlide, setActiveSlide] = useState(0);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setActiveSlide(prevSlide => (prevSlide + 1) % sectionData.length);
+        }, 2500);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    const titles = sectionData.map(d => d.title);
+    const subtitles = sectionData.map(d => d.subtitle);
+
+    const scrambledTitle = useTextScramble(titles, activeSlide);
+    const scrambledSubtitle = useTextScramble(subtitles, activeSlide);
+
+    return (
+        <section className="trading-view-section">
+            <div className="trading-view-content-wrapper">
+                <h2 className="section-title">{scrambledTitle}</h2>
+                <p className="section-subtitle">{scrambledSubtitle}</p>
+            </div>
+
+            <div className="trading-view-images-container">
+                {sectionData.map((slide, index) => (
+                    <div
+                        key={index}
+                        className="trading-image-wrapper"
+                        style={{ opacity: activeSlide === index ? 1 : 0 }}
+                    >
+                        <img
+                            src={slide.imgSrc}
+                            alt={`Trading Platform UI - View ${index + 1}`}
+                            className="trading-image"
+                        />
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+};
+
 const StatsSection = () => {
     const totalValue = useCountUp(134567890);
     const dailyVolume = useCountUp(25890123);
@@ -820,7 +991,6 @@ const Footer = () => {
     );
 };
 
-
 // --- Component Trang Chủ Chính ---
 export default function HomePage() {
     return (
@@ -829,6 +999,7 @@ export default function HomePage() {
             <div className="page-wrapper">
                 <main>
                     <HeroSection />
+                    <TradingViewSection />
                     <StatsSection />
                     <FeaturesSection />
                     <PartnersSection />

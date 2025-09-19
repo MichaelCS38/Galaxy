@@ -8,6 +8,16 @@
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
     border-bottom: 1px solid #ff4d4f;
 
+    .menu-item-icon {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+
+    .icon-menu-mobile {
+        display: none;
+    }
+
     .icon-wallet {
         width: 20px;
         height: 20px;
@@ -179,6 +189,10 @@
     }
 
     @media (max-width: 768px) {
+        .icon-menu-mobile {
+            display: block;
+        }
+
         &__nav {
             position: fixed;
             top: 0;
