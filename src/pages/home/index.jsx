@@ -168,7 +168,7 @@ const useTextScramble = (phrases, activeIndex) => {
 
 // --- CÁC SECTION CỦA TRANG ---
 const HeroSection = () => {
-    const typedText = useTypingEffect("ecentralized Trading", 150, 100, 2000);
+    const typedText = useTypingEffect("rade Crypto", 150, 100, 2000);
     return (
         <section className="hero-section">
             <div className="blurry-shape shape-1"></div>
@@ -177,15 +177,15 @@ const HeroSection = () => {
             <div className="container hero-container">
                 <div className="hero-content">
                     <h1 className="hero-title">
-                        <span className="hero-title-static">The Future Of</span>
+                        <span className="hero-title-static">Decentralized perpetual contracts.</span>
                         <br />
                         <span className="hero-title-dynamic">
-                            D{typedText}
+                            T{typedText}
                             {/* <span className="typing-cursor"></span> */}
                         </span>
                     </h1>
                     <p className="hero-subtitle">
-                        Experience superior speed, security, and liquidity on a next-generation DEX platform. Trade smarter, not harder.
+                        Non-custodial trading built for all — whether you're new to crypto or a seasoned pro.
                     </p>
                     <div className="hero-buttons">
                         <button className="btn btn-primary">Launch App</button>
@@ -196,7 +196,10 @@ const HeroSection = () => {
                     <div className="sphere-3d-container">
                         <div className="sphere-core">
                             <div className="sphere-glow"></div>
-                            <img src="https://placehold.co/100x100/fff5f7/f61f77?text=BABY SHIBA" alt="Logo" className="sphere-logo" />
+                            <img src='/images/logo-bapy.jpeg'
+                                alt="Logo" className="sphere-logo" />
+                            {/* <img src="https://placehold.co/100x100/fff5f7/f61f77?text=BABY SHIBA"
+                             alt="Logo" className="sphere-logo" /> */}
                         </div>
                         <div className="sphere-orbit orbit-1">
                             <div className="sphere-satellite"></div>
@@ -284,9 +287,9 @@ const TradingViewSection = () => {
 };
 
 const StatsSection = () => {
-    const totalValue = useCountUp(134567890);
-    const dailyVolume = useCountUp(25890123);
-    const activeUsers = useCountUp(15234);
+    const totalValue = useCountUp(0);
+    const dailyVolume = useCountUp(0);
+    const activeUsers = useCountUp(0);
     const stats = [
         { label: "Total Value Locked", value: `$${totalValue.toLocaleString()}` },
         { label: "24h Trading Volume", value: `$${dailyVolume.toLocaleString()}` },
@@ -309,10 +312,16 @@ const StatsSection = () => {
 };
 const FeaturesSection = () => {
     const features = [
-        { icon: '⚡️', title: 'Lightning-Fast Trades', description: 'Execute trades in milliseconds with our optimized, high-performance matching engine.' },
-        { icon: '🛡️', title: 'Fort-Knox Security', description: 'Your assets are protected by multi-layered security protocols and regular audits.' },
-        { icon: '🌊', title: 'Deep Liquidity Pools', description: 'Access deep liquidity across a wide range of assets for minimal slippage.' },
-        { icon: '🎁', title: 'Rewarding Ecosystem', description: 'Earn passive income through staking, yield farming, and liquidity providing.' },
+        { icon: '⚡️', title: 'Cross-chain trading', description: 'No bridging or no switching, just pick a chain and place a trade.' },
+        { icon: '🛡️', title: 'Unmatched liquidity', description: 'Access deep liquidity pooled across markets to support large, confident trades.' },
+        {
+            icon: '🌊', title: 'Advanced tools',
+            description: 'Use powerful tools like hidden orders — built for control, speed, and a competitive edge.'
+        },
+        {
+            icon: '🎁', title: 'Confidence in every trade',
+            description: 'Whether you’re new or a pro, enjoy a streamlined experience built for clarity and control.'
+        },
     ];
     const [sectionRef, isVisible] = useScrollAnimation({
         threshold: 0.2,
@@ -322,7 +331,7 @@ const FeaturesSection = () => {
         <section ref={sectionRef} className="features-section">
             <div className="container">
                 <div className="section-header">
-                    <h2 className="section-title">Why Choose Our DEX?</h2>
+                    <h2 className="section-title">Why Baby Shiba?</h2>
                     <p className="section-subtitle">We provide a comprehensive suite of tools designed for both novice and professional traders.</p>
                 </div>
                 <div className="features-grid">
@@ -356,7 +365,7 @@ const PartnersSection = () => {
     return (
         <section className="partners-section">
             <div className="container">
-                <h2 className="section-title">Backed By</h2>
+                <h2 className="section-title">Our partners</h2>
                 <div className="marquee-container">
                     <div className="marquee-content">
                         {marqueeItems.map((partner, index) => (
