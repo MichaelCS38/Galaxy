@@ -143,7 +143,7 @@ const Header = () => {
     }
 
     return (
-        <header className="header">
+        <header className={`${pathname === '/' ? 'header' : 'header header-new'}`}>
             <div className="content-header">
                 <div className="header__left">
                     <div

@@ -30,7 +30,7 @@ const ChartPage = () => {
                 symbol: `BINANCE:${selectedPair.symbol}`,
                 interval: "60",
                 timezone: "Etc/UTC",
-                theme: "light",
+                theme: "dark",
                 style: "1",
                 locale: "en",
                 container_id: "tradingview_chart"
@@ -53,7 +53,7 @@ const ChartPage = () => {
                     widgetRef.current.remove();
                     widgetRef.current = null;
                 }
-                
+
                 // Clear container
                 const chartContainer = container.current?.querySelector('#tradingview_chart');
                 if (chartContainer) {

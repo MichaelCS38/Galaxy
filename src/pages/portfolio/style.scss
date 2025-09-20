@@ -60,6 +60,7 @@
      font-size: 28px;
      font-weight: 500;
      margin: 4px 0 16px 0;
+     color: #fff;
  }
 
  .pnl-info .info-row {
@@ -86,6 +87,11 @@
      font-size: 16px;
      font-weight: 500;
      margin-bottom: 16px;
+     color: #fff;
+ }
+
+ .card-body {
+     color: #fff;
  }
 
  .products-card .info-row {
@@ -93,6 +99,7 @@
      justify-content: space-between;
      font-size: 14px;
      margin-bottom: 12px;
+     color: #fff !important;
  }
 
  .pnl-chart-card {
@@ -134,6 +141,7 @@
  .product-detail-card .card-header .title {
      font-size: 18px;
      font-weight: 500;
+     color: #fff;
  }
 
  .product-detail-card .card-header .action-link {
@@ -286,6 +294,7 @@
  .fee-tier h4 {
      margin: 0;
      font-weight: 500;
+     color: #fff;
  }
 
  .vip-level a {
@@ -340,6 +349,7 @@
  .summary-card-header .title {
      font-size: 16px;
      font-weight: 500;
+     color: #fff;
  }
 
  .summary-card-header .ant-btn-group {
@@ -383,12 +393,17 @@
      font-size: 18px;
      font-weight: 500;
      margin-bottom: 8px;
+     color: #fff;
  }
 
  .summary-item .sub-item {
      display: flex;
      justify-content: space-between;
      font-size: 13px;
+
+     span {
+         color: #fff;
+     }
  }
 
  .summary-item .sub-item .long {

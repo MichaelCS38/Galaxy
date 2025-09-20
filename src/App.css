@@ -2,30 +2,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Wix+Madefor+Display:wght@700&display=swap');
 
 :root {
-  --background-light: #fce4ec;
+  --background-light: #000;
   /* Light pink background */
-  --background-surface: #ffffff;
+  --background-surface: #191919;
   /* White for panels */
-  --background-panel: #f8f9fa;
+  --background-panel: #999999;
   /* Slightly off-white */
-  --border-color: #e0e0e0;
+  --border-color: transparent;
   /* Light grey border */
   --border-color-input: #d1d5db;
   /* Clearer border for inputs */
-  --text-primary: #121212;
+  --text-primary: #fff;
   /* Dark text for readability */
   --text-primary-on-pink: #ffffff;
   /* White text on pink buttons */
-  --text-secondary: #5f6368;
+  --text-secondary: #999999;
   /* Grey for secondary text */
   --text-tertiary: #9aa0a6;
   /* Lighter grey */
   --color-green: #089981;
   --color-red: #f23645;
-  --color-primary: #f61f77;
+  --color-primary: #fff;
   /* Main pink accent color */
   --color-disabled: #bdbdbd;
 }
+
+
 
 .App {
   text-align: center;

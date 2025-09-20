@@ -102,8 +102,13 @@
   .invite-button {
       margin-top: 16px;
       height: 44px;
-      background-color: var(--color-primary);
-      border-color: var(--color-primary);
+      background-color: #000;
+      border-color: #000;
+
+      &:hover {
+          background-color: #000 !important;
+          border-color: #000;
+      }
   }
 
   .referral-history {
@@ -154,7 +159,7 @@
   }
 
   .referral-history .ant-table-thead>tr>th {
-      background: var(--background-panel);
+      background: #000;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-secondary);
   }
@@ -165,7 +170,7 @@
   }
 
   .referral-history .ant-table-tbody>tr.ant-table-row:hover>td {
-      background: var(--background-light);
+      background: #000 !important;
   }
 
   /* --- Invite Modal --- */
@@ -176,10 +181,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      background-image: linear-gradient(rgba(233, 30, 99, 0.8), rgba(233, 30, 99, 0.8)), url('https://static.babyshibdex.com/cloud-futures/static/images/babyshib/bg/babyshib-hero.avif');
-      background-size: cover;
-      background-position: center right;
-      background-blend-mode: multiply;
+      background: #000;
   }
 
   .invite-banner-content {

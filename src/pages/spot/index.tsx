@@ -6,6 +6,7 @@ import ChartPage from './chart';
 import { useTrading } from '../../contexts/TradingContext';
 import './style.scss';
 
+
 // --- CSS IN-LINE ---
 
 
@@ -123,7 +124,7 @@ const TradingChart = () => {
 
 const RecentTrades = () => {
     const { selectedPair, recentTrades } = useTrading();
-    
+
     // Get base asset from symbol (e.g., ETH from ETHUSDT)
     const baseAsset = selectedPair.symbol.replace('USDT', '');
 
@@ -168,7 +169,7 @@ const OrderBook = () => {
                 <Tabs.TabPane tab="Order book" key="1">
                     <div className="order-book-controls">
                         <div className="order-book-icons">
-                            <div 
+                            <div
                                 className={`order-book-icon ${showBuys && showSells ? 'active' : ''}`}
                                 onClick={() => {
                                     setShowBuys(true);
@@ -177,14 +178,14 @@ const OrderBook = () => {
                                 title="Show both buy and sell orders"
                             >
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <rect x="2" y="2" width="12" height="6" stroke={showBuys && showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
-                                    <rect x="2" y="10" width="12" height="6" stroke={showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
-                                    <line x1="14" y1="4" x2="16" y2="4" stroke="#8c8c8c" strokeWidth="1"/>
-                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1"/>
-                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <rect x="2" y="2" width="12" height="6" stroke={showBuys && showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
+                                    <rect x="2" y="10" width="12" height="6" stroke={showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
+                                    <line x1="14" y1="4" x2="16" y2="4" stroke="#8c8c8c" strokeWidth="1" />
+                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1" />
+                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1" />
                                 </svg>
                             </div>
-                            <div 
+                            <div
                                 className={`order-book-icon ${showBuys && !showSells ? 'active' : ''}`}
                                 onClick={() => {
                                     setShowBuys(true);
@@ -193,13 +194,13 @@ const OrderBook = () => {
                                 title="Show only buy orders"
                             >
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <rect x="2" y="4" width="12" height="8" stroke={showBuys && !showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
-                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1"/>
-                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1"/>
-                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <rect x="2" y="4" width="12" height="8" stroke={showBuys && !showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
+                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1" />
+                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1" />
+                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1" />
                                 </svg>
                             </div>
-                            <div 
+                            <div
                                 className={`order-book-icon ${!showBuys && showSells ? 'active' : ''}`}
                                 onClick={() => {
                                     setShowBuys(false);
@@ -208,17 +209,17 @@ const OrderBook = () => {
                                 title="Show only sell orders"
                             >
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <rect x="2" y="4" width="12" height="8" stroke={!showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1"/>
-                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1"/>
-                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1"/>
-                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1"/>
+                                    <rect x="2" y="4" width="12" height="8" stroke={!showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
+                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1" />
+                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1" />
+                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1" />
                                 </svg>
                             </div>
                         </div>
                         <div className="precision-selector">
                             <span>{precision}</span>
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M3 4.5L6 7.5L9 4.5" stroke="#8c8c8c" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M3 4.5L6 7.5L9 4.5" stroke="#8c8c8c" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
                     </div>
@@ -664,7 +665,7 @@ const AssetModeModal = ({ visible, onCancel }: any) => {
                 </Button>,
                 <Button
                     onClick={onCancel}
-                    key="confirm" type="primary" disabled={!selectedMode} style={{ backgroundColor: selectedMode ? 'var(--color-primary)' : '', borderColor: selectedMode ? 'var(--color-primary)' : '' }}>
+                    key="confirm" type="primary" disabled={!selectedMode} style={{ backgroundColor: selectedMode ? '#000' : '', borderColor: selectedMode ? 'var(--color-primary)' : '' }}>
                     Confirm
                 </Button>,
             ]}
@@ -768,28 +769,28 @@ const PositionsPanel = () => (
     <div className="bottom-panel">
         <Tabs defaultActiveKey="1" style={{ padding: '0 16px' }}>
             <Tabs.TabPane tab="Open Orders (0)" key="1">
-                <Table columns={DepositColumns} dataSource={[]} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
-                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>Please connect a wallet first</div>
+                <Table columns={DepositColumns} dataSource={['hhh']} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
+                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>No data</div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Order History" key="2">
-                <Table columns={HisColumns} dataSource={[]} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
-                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>Please connect a wallet first</div>
+                <Table columns={HisColumns} dataSource={['hhh']} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
+                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>No data</div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Trade History" key="3">
-                <Table columns={HisColumns} dataSource={[]} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
-                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>Please connect a wallet first</div>
+                <Table columns={HisColumns} dataSource={['hhh']} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
+                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>No data</div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Assets" key="4">
-                <Table columns={assetsColumns} dataSource={[]} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
-                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>Please connect a wallet first</div>
+                <Table columns={assetsColumns} dataSource={['hhh']} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
+                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>No data</div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Transaction History" key="5">
-                <Table columns={HisColumns} dataSource={[]} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
-                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>Please connect a wallet first</div>
+                <Table columns={HisColumns} dataSource={['hhh']} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
+                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>No data</div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Deposit and Withdraw" key="6">
-                <Table columns={DepositColumns} dataSource={[]} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
-                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>Please connect a wallet first</div>
+                <Table columns={DepositColumns} dataSource={['hhh']} size="small" pagination={false} rowClassName={() => 'table-row-dark'} />
+                <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>No data</div>
             </Tabs.TabPane>
         </Tabs>
     </div>
@@ -832,7 +833,7 @@ function Spot() {
     }, []);
     return (
         <>
-            <div className="trading-app">
+            <div className="trading-app spot-page">
                 <Ticker />
                 {isMobile ? (
                     <>

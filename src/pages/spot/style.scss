@@ -1,1162 +1,1173 @@
-.chart-page {
-    width: 100%;
-    height: 100%;
-}
+.spot-page {
 
-.chart-custom {
-    width: 100%;
-    height: 100%;
-}
+    .chart-page {
+        width: 100%;
+        height: 100%;
+    }
 
-
-.trading-app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding-top: 70px;
-    max-width: 2440px;
-    margin: 0 auto;
-}
-
-/* --- Header --- */
-.app-header {
-    background-color: var(--background-surface);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    height: 60px;
-    flex-shrink: 0;
-}
-
-.app-header .logo {
-    color: var(--color-primary);
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 24px;
-}
-
-.app-header .ant-menu {
-    background: transparent;
-    border-bottom: none;
-    height: 60px;
-    line-height: 60px;
-    flex-grow: 1;
-}
-
-.app-header .ant-menu-item,
-.app-header .ant-menu-submenu-title {
-    color: var(--text-secondary);
-}
-
-.app-header .ant-menu-item-selected .ant-menu-title-content,
-.app-header .ant-menu-item:hover .ant-menu-title-content {
-    color: var(--color-primary) !important;
-}
-
-.app-header .ant-menu-item-selected,
-.app-header .ant-menu-item:hover {
-    border-bottom: 2px solid var(--color-primary) !important;
-}
-
-.header-actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-/* --- Ticker Bar --- */
-.ticker-bar {
-    background-color: var(--background-surface);
-    border-bottom: 1px solid var(--border-color);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-shrink: 0;
-    margin: 0 10px;
-    border-radius: 4px;
-}
-
-.ticker-item {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.ticker-label {
-    color: var(--text-secondary);
-    font-size: 12px;
-}
-
-.ticker-value {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.ticker-value.green {
-    color: var(--color-green);
-}
-
-.ticker-value.red {
-    color: var(--color-red);
-}
-
-/* --- Main Content --- */
-.main-content {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: 1fr 280px 320px;
-    grid-template-rows: minmax(470px, 1fr) auto;
-    grid-template-areas:
-        "chart book trade"
-        "positions positions trade";
-    gap: 8px;
-    padding: 8px;
-    overflow-y: auto;
-    /* Allow vertical scrolling */
-    min-height: 0;
-    /* Fix for flexbox scrolling issue */
-}
+    .chart-custom {
+        width: 100%;
+        height: 100%;
+    }
 
 
+    .trading-app {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        padding-top: 67px;
+        max-width: 2440px;
+        margin: 0 auto;
+    }
 
-.right-panel {
-    grid-area: trade;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    gap: 8px;
-    min-height: 0;
-}
+    /* --- Header --- */
+    .app-header {
+        background-color: var(--background-surface);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        flex-shrink: 0;
+    }
 
-/* --- Chart --- */
-.chart-container {
-    grid-area: chart;
-    background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    min-height: 470px;
-}
+    .app-header .logo {
+        color: var(--color-primary);
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 24px;
+    }
 
-.chart-toolbar {
-    padding: 8px;
-    display: flex;
-    gap: 12px;
-    border-bottom: 1px solid var(--border-color);
-}
+    .app-header .ant-menu {
+        background: transparent;
+        border-bottom: none;
+        height: 60px;
+        line-height: 60px;
+        flex-grow: 1;
+    }
 
-#chart-placeholder {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-tertiary);
-}
+    .app-header .ant-menu-item,
+    .app-header .ant-menu-submenu-title {
+        color: var(--text-secondary);
+    }
 
-/* --- Order Book & Trades --- */
-.order-book-trades {
-    grid-area: book;
-    background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
+    .app-header .ant-menu-item-selected .ant-menu-title-content,
+    .app-header .ant-menu-item:hover .ant-menu-title-content {
+        color: var(--color-primary) !important;
+    }
 
-.order-book-trades .ant-tabs {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
+    .app-header .ant-menu-item-selected,
+    .app-header .ant-menu-item:hover {
+        border-bottom: 2px solid var(--color-primary) !important;
+    }
 
-.order-book-trades .ant-tabs-content-holder {
-    overflow-y: auto;
-    flex-grow: 1;
-    height: 400px;
-}
+    .header-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
 
-.order-book-trades .ant-tabs-nav {
-    margin-bottom: 0;
-}
+    /* --- Ticker Bar --- */
+    .ticker-bar {
+        background-color: var(--background-surface);
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        flex-shrink: 0;
+        margin: 0;
+        border-radius: 4px;
+        height: 60px;
+    }
 
-.order-book-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--background-light);
-}
+    .ticker-item {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 5px;
+    }
 
-.order-book-icons {
-    display: flex;
-    gap: 8px;
-}
+    .ticker-label {
+        color: var(--text-secondary);
+        font-size: 14px;
+        font-weight: 500;
+    }
 
-.order-book-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: transparent;
-}
+    .ticker-value {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
 
-.order-book-icon:hover {
-    background-color: var(--background-surface);
-}
+    .ticker-value.green {
+        color: var(--color-green);
+    }
 
-.order-book-icon.active {
-    background-color: var(--color-primary);
-}
+    .ticker-value.red {
+        color: var(--color-red);
+    }
 
-.order-book-icon.active svg {
-    filter: brightness(0) invert(1);
-}
+    /* --- Main Content --- */
+    .main-content {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: 1fr 280px 320px;
+        grid-template-rows: minmax(470px, 1fr) auto;
+        grid-template-areas:
+            "chart book trade"
+            "positions positions trade";
+        gap: 2px;
+        padding: 2px;
+        overflow-y: auto;
+        /* Allow vertical scrolling */
+        min-height: 0;
+        /* Fix for flexbox scrolling issue */
+    }
 
-.precision-selector {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    color: var(--text-secondary);
-    font-size: 12px;
-}
 
-.precision-selector:hover {
-    background-color: var(--background-surface);
-}
 
-.order-book-header,
-.trades-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    font-size: 12px;
-    color: var(--text-secondary);
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--border-color);
-}
+    .right-panel {
+        grid-area: trade;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        gap: 2px;
+        min-height: 0;
+    }
 
-.order-book-row,
-.trade-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    font-size: 13px;
-    padding: 4px 12px;
-    position: relative;
-    transition: background-color 0.2s;
-}
+    /* --- Chart --- */
+    .chart-container {
+        grid-area: chart;
+        background-color: var(--background-surface);
+        // border: 1px solid var(--border-color);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        min-height: 470px;
+    }
 
-.order-book-row.flash {
-    animation: flash 0.5s ease-out;
-}
+    .chart-toolbar {
+        padding: 8px;
+        display: flex;
+        gap: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
 
-@keyframes flash {
-    0% {
+    #chart-placeholder {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-tertiary);
+    }
+
+    /* --- Order Book & Trades --- */
+    .order-book-trades {
+        grid-area: book;
+        background-color: var(--background-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .order-book-trades .ant-tabs {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .order-book-trades .ant-tabs-content-holder {
+        overflow-y: auto;
+        flex-grow: 1;
+        height: 400px;
+    }
+
+    .order-book-trades .ant-tabs-nav {
+        margin-bottom: 0;
+    }
+
+    .order-book-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border-color);
         background-color: var(--background-light);
     }
 
-    100% {
+    .order-book-icons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .order-book-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
         background-color: transparent;
     }
-}
 
-.order-book-row .price-red,
-.trade-row .price-red {
-    color: var(--color-red);
-}
-
-.order-book-row .price-green,
-.trade-row .price-green {
-    color: var(--color-green);
-}
-
-.order-book-row .size,
-.order-book-row .sum {
-    text-align: right;
-    color: var(--text-primary);
-}
-
-.trade-row .size,
-.trade-row .time {
-    text-align: right;
-    color: var(--text-primary);
-}
-
-.order-book-bg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    opacity: 0.15;
-    transition: width 0.3s ease-in-out;
-}
-
-.order-book-bg.red {
-    background-color: var(--color-red);
-}
-
-.order-book-bg.green {
-    background-color: var(--color-green);
-}
-
-.order-book-current-price {
-    padding: 8px 12px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    color: var(--color-green);
-}
-
-/* --- Trade Panel --- */
-.trade-panel {
-    background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    min-height: 470px;
-}
-
-.trade-panel .ant-tabs-nav {
-    margin-bottom: 16px;
-}
-
-.trade-panel .ant-tabs-tab {
-    color: var(--text-secondary);
-}
-
-.trade-panel .ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: var(--color-primary) !important;
-}
-
-.ant-slider-track {
-    background-color: var(--color-primary) !important;
-}
-
-.trade-panel .ant-tabs-ink-bar {
-    background: var(--color-primary);
-}
-
-.trade-panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    margin-bottom: 12px;
-}
-
-.trade-panel-header .avbl {
-    color: var(--text-secondary);
-}
-
-.trade-panel-header .avbl .value {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.trade-panel-header .leverage-actions {
-    display: flex;
-    gap: 4px;
-}
-
-.trade-panel-header .leverage-actions .ant-btn {
-    padding: 0 8px;
-    font-size: 12px;
-    background-color: var(--background-panel);
-    border-color: var(--border-color);
-}
-
-.trade-panel-input-group {
-    position: relative;
-    margin-bottom: 12px;
-}
-
-.trade-panel-input-group .ant-input-number {
-    width: 100%;
-    background-color: var(--background-panel);
-    border-color: var(--border-color);
-}
-
-.trade-panel-input-group .input-label {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-    pointer-events: none;
-}
-
-.trade-panel-input-group .ant-input-number-input {
-    padding-left: 50px;
-}
-
-.trade-panel-input-group .input-suffix {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-}
-
-.trade-panel .ant-slider {
-    margin: 8px 0 16px 0;
-}
-
-.trade-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.trade-options .ant-checkbox-wrapper {
-    font-size: 13px;
-    color: var(--text-secondary);
-}
-
-.trade-options .hidden-order-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.trade-info {
-    border-top: 1px solid var(--border-color);
-    padding-top: 12px;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.trade-info-row {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-secondary);
-}
-
-.trade-info-row .value {
-    color: var(--text-primary);
-}
-
-/* --- Account Panel --- */
-.account-panel {
-    background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-.account-panel .panel-title {
-    font-size: 16px;
-    font-weight: 500;
-    margin: 0 0 8px 0;
-    color: var(--text-primary);
-}
-
-.account-panel .account-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-}
-
-.account-panel .account-actions .ant-btn {
-    background: var(--background-panel);
-    border-color: var(--border-color);
-    color: var(--text-secondary);
-}
-
-.account-panel .account-actions .ant-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-}
-
-.account-panel .account-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 13px;
-    margin-top: 8px;
-}
-
-.account-panel .info-row {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-secondary);
-}
-
-.account-panel .info-row .value {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.account-panel .info-row .value.green {
-    color: var(--color-green);
-}
-
-.account-panel .multi-asset-btn {
-    margin-top: 12px;
-    background: var(--background-panel);
-    border-color: var(--border-color);
-    color: var(--text-secondary);
-}
-
-.account-panel .multi-asset-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-}
-
-/* --- Shared Modal Styles --- */
-.ant-modal-content {
-    background-color: var(--background-surface) !important;
-    color: var(--text-primary) !important;
-    border-radius: 8px !important;
-}
-
-.ant-modal-header {
-    background-color: var(--background-surface) !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    border-radius: 8px 8px 0 0 !important;
-}
-
-.ant-modal-title {
-    color: var(--text-primary) !important;
-}
-
-.ant-modal-close-x {
-    color: var(--text-secondary) !important;
-}
-
-/* --- Deposit Modal --- */
-.deposit-modal .ant-tabs-tab {
-    color: var(--text-secondary);
-}
-
-.deposit-modal .ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: var(--color-primary) !important;
-}
-
-.deposit-modal .ant-tabs-ink-bar {
-    background: var(--color-primary);
-}
-
-.deposit-modal .deposit-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 0px;
-}
-
-.deposit-form .ant-select-single {
-    font-size: 14px;
-    height: 48px;
-}
-
-.deposit-form .ant-input-number-input-wrap {
-    height: 100% !important;
-}
-
-.deposit-modal .ant-select-selector {
-    height: 48px !important;
-    padding: 0 16px !important;
-    align-items: center;
-    background-color: var(--background-panel) !important;
-    border: 1px solid var(--border-color-input) !important;
-    border-radius: 6px !important;
-}
-
-.deposit-modal .amount-input-group {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-panel);
-    border: 1px solid var(--border-color-input);
-    border-radius: 6px;
-    padding-left: 16px;
-    height: 48px;
-    transition: all 0.3s;
-}
-
-.deposit-modal .amount-input-group:focus-within {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
-}
-
-.deposit-modal .amount-placeholder {
-    color: var(--text-tertiary);
-    margin-right: 8px;
-}
-
-.deposit-modal .amount-input-group .ant-input-number {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    width: 100%;
-    height: 100%;
-}
-
-.deposit-modal .amount-input-group .ant-input-number-input {
-    text-align: right;
-    height: 100%;
-}
-
-.deposit-modal .amount-input-group .ant-select {
-    width: auto;
-}
-
-.deposit-modal .amount-input-group .ant-select-selector {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    height: auto !important;
-}
-
-.deposit-modal .balance-info {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-secondary);
-    font-size: 13px;
-}
-
-.deposit-modal .connect-wallet-btn {
-    margin-top: 14px;
-    height: 48px;
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    font-size: 16px;
-
-}
-
-.ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: var(--color-primary) !important;
-}
-
-.ant-tabs-tab-btn:hover {
-    color: var(--color-primary) !important;
-}
-
-.deposit-modal .connect-wallet-btn:hover {
-    background-color: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
-    opacity: 0.9;
-}
-
-/* --- Transfer Modal --- */
-.transfer-modal .transfer-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 24px;
-}
-
-.transfer-modal .transfer-direction {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.transfer-modal .transfer-box {
-    border: 1px solid var(--border-color-input);
-    background-color: var(--background-panel);
-    border-radius: 6px;
-    padding: 12px 16px;
-    width: 42%;
-    text-align: center;
-}
-
-.transfer-modal .transfer-box .label {
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-.transfer-modal .transfer-box .value {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.transfer-modal .transfer-swap-icon {
-    font-size: 18px;
-    color: var(--color-primary);
-    cursor: pointer;
-}
-
-.transfer-modal .amount-input-group {
-    display: flex;
-    align-items: center;
-    background-color: var(--background-panel);
-    border: 1px solid var(--border-color-input);
-    border-radius: 6px;
-    padding-left: 16px;
-    height: 48px;
-    transition: all 0.3s;
-}
-
-.transfer-modal .amount-input-group:focus-within {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
-}
-
-.transfer-modal .info-line {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-secondary);
-    font-size: 13px;
-}
-
-.transfer-modal .transfer-btn {
-    margin-top: 24px;
-    height: 48px;
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    font-size: 16px;
-}
-
-/* --- Asset Mode Modal --- */
-.asset-mode-modal .modal-body {
-    padding-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.asset-mode-modal .asset-option {
-    border: 1px solid var(--border-color-input);
-    border-radius: 8px;
-    padding: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.asset-mode-modal .asset-option.selected {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
-}
-
-.asset-mode-modal .option-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.asset-mode-modal .option-title {
-    font-weight: 500;
-    color: var(--text-primary);
-}
-
-.asset-mode-modal .option-description {
-    font-size: 13px;
-    color: var(--text-secondary);
-    padding-left: 36px;
-    /* Align with title */
-    margin-top: 8px;
-}
-
-.asset-mode-modal .read-more {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 16px;
-}
-
-.asset-mode-modal .read-more a {
-    color: var(--color-primary);
-    text-decoration: none;
-}
-
-.asset-mode-modal .ant-modal-footer {
-    border-top: 1px solid var(--border-color);
-    padding-top: 16px;
-    margin-top: 24px;
-}
-
-.asset-mode-modal .ant-btn-primary[disabled] {
-    background-color: var(--color-disabled) !important;
-    border-color: var(--color-disabled) !important;
-    color: #fff !important;
-}
-
-/* --- Margin Mode Modal --- */
-.margin-mode-modal .modal-body {
-    padding-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.margin-mode-modal .mode-options {
-    display: flex;
-    gap: 12px;
-}
-
-.margin-mode-modal .mode-option {
-    flex: 1;
-    border: 1px solid var(--border-color-input);
-    border-radius: 6px;
-    padding: 12px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.2s;
-}
-
-.margin-mode-modal .mode-option.selected {
-    border-color: var(--color-primary);
-}
-
-.margin-mode-modal .mode-option .anticon-check {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    color: var(--color-primary);
-}
-
-.margin-mode-modal .description {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-.margin-mode-modal .note {
-    font-size: 13px;
-    color: var(--text-secondary);
-}
-
-.margin-mode-modal .connect-wallet-btn {
-    margin-top: 24px;
-    height: 48px;
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    font-size: 16px;
-}
-
-/* --- Adjust Leverage Modal --- */
-.adjust-leverage-modal .modal-body {
-    padding-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.adjust-leverage-modal .leverage-label {
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-.adjust-leverage-modal .leverage-input-wrapper {
-    display: flex;
-    align-items: center;
-    border: 1px solid var(--border-color-input);
-    border-radius: 6px;
-}
-
-.adjust-leverage-modal .leverage-input-wrapper .ant-btn {
-    border: none;
-    font-size: 16px;
-    color: var(--text-secondary);
-}
-
-.adjust-leverage-modal .leverage-input-wrapper .ant-input-number {
-    flex-grow: 1;
-    border: none;
-    text-align: center;
-    box-shadow: none !important;
-}
-
-.adjust-leverage-modal .leverage-input-wrapper .ant-input-number-input {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.adjust-leverage-modal .ant-slider {
-    margin: 0 8px;
-}
-
-.adjust-leverage-modal .info-text {
-    font-size: 13px;
-    color: var(--text-secondary);
-}
-
-.adjust-leverage-modal .info-text .value {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.adjust-leverage-modal .note {
-    font-size: 13px;
-    color: var(--text-secondary);
-}
-
-.adjust-leverage-modal .connect-wallet-btn {
-    margin-top: 16px;
-    height: 48px;
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    font-size: 16px;
-}
-
-/* --- Bottom Panel --- */
-.bottom-panel {
-    grid-area: positions;
-    background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-}
-
-.bottom-panel .ant-table {
-    background: transparent;
-}
-
-.bottom-panel .ant-table-thead>tr>th {
-    background: var(--background-panel);
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-secondary);
-}
-
-.bottom-panel .ant-table-tbody>tr>td {
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-primary);
-}
-
-.bottom-panel .ant-table-tbody>tr.ant-table-row:hover>td {
-    background: var(--background-light);
-}
-
-/* --- Footer --- */
-.app-footer {
-    background-color: var(--background-surface);
-    border-top: 1px solid var(--border-color);
-    padding: 0 10px;
-    height: 30px;
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    flex-shrink: 0;
-}
-
-.footer-ticker {
-    display: inline-block;
-    animation: marquee 40s linear infinite;
-}
-
-.footer-ticker-item {
-    display: inline-block;
-    margin-right: 30px;
-    font-size: 12px;
-}
-
-.spot-trade-panel {
-    background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-}
-
-.spot-trade-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 16px;
-}
-
-.tab-btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--text-secondary);
-    position: relative;
-}
-
-.tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-}
-
-.tab-btn.active.buy {
-    color: var(--color-green);
-}
-
-.tab-btn.active.sell {
-    color: var(--color-red);
-}
-
-.tab-btn.active.buy::after {
-    background-color: var(--color-green);
-}
-
-.tab-btn.active.sell::after {
-    background-color: var(--color-red);
-}
-
-.panel-content .ant-tabs-nav {
-    margin: 0 0 16px 0;
-}
-
-.avbl-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 13px;
-    color: var(--text-secondary);
-}
-
-.input-group {
-    position: relative;
-    margin-bottom: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.input-group .input-label {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-    pointer-events: none;
-}
-
-.input-group .ant-input {
-    background-color: var(--background-panel);
-    border-color: var(--border-color);
-    height: 40px;
-}
-
-.asset-selector {
-    position: absolute;
-    right: 2px;
-    top: 4px;
-    bottom: 0px;
-    border: none;
-    background-color: var(--background-panel);
-}
-
-.asset-selector .ant-select-selector {
-    border: none !important;
-    box-shadow: none !important;
-}
-
-.slider-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--text-tertiary);
-    margin-bottom: 16px;
-}
-
-.deposit-btn {
-    width: 100%;
-    height: 40px;
-    font-size: 16px;
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-}
-
-.deposit-btn:hover {
-    background-color: var(--color-primary) !important;
-    opacity: 0.9;
-}
-
-
-.info-row-bottom {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 12px;
-}
-
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
+    .order-book-icon:hover {
+        background-color: var(--background-surface);
     }
 
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-@media (max-width: 1200px) {
-    .main-content {
-        grid-template-columns: 1fr 320px;
-        grid-template-rows: auto auto auto;
-        grid-template-areas:
-            "chart trade"
-            "book trade"
-            "positions positions";
-        overflow-y: auto;
+    .order-book-icon.active {
+        background-color: var(--color-primary);
     }
 
-    .right-panel {
-        grid-template-rows: min-content auto;
+    .order-book-icon.active svg {
+        filter: brightness(0) invert(1);
     }
-}
 
-@media (max-width: 992px) {
-    .main-content {
+    .precision-selector {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: var(--text-secondary);
+        font-size: 12px;
+    }
+
+    .precision-selector:hover {
+        background-color: var(--background-surface);
+    }
+
+    .order-book-header,
+    .trades-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        font-size: 12px;
+        color: var(--text-secondary);
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .order-book-row,
+    .trade-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        font-size: 13px;
+        padding: 4px 12px;
+        position: relative;
+        transition: background-color 0.2s;
+    }
+
+    .order-book-row.flash {
+        animation: flash 0.5s ease-out;
+    }
+
+    @keyframes flash {
+        0% {
+            background-color: var(--background-light);
+        }
+
+        100% {
+            background-color: transparent;
+        }
+    }
+
+    .order-book-row .price-red,
+    .trade-row .price-red {
+        color: var(--color-red);
+    }
+
+    .order-book-row .price-green,
+    .trade-row .price-green {
+        color: var(--color-green);
+    }
+
+    .order-book-row .size,
+    .order-book-row .sum {
+        text-align: right;
+        color: var(--text-primary);
+    }
+
+    .trade-row .size,
+    .trade-row .time {
+        text-align: right;
+        color: var(--text-primary);
+    }
+
+    .order-book-bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0.15;
+        transition: width 0.3s ease-in-out;
+    }
+
+    .order-book-bg.red {
+        background-color: var(--color-red);
+    }
+
+    .order-book-bg.green {
+        background-color: var(--color-green);
+    }
+
+    .order-book-current-price {
+        padding: 8px 12px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        color: var(--color-green);
+    }
+
+    /* --- Trade Panel --- */
+    .trade-panel {
+        background-color: var(--background-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 12px;
         display: flex;
         flex-direction: column;
+        min-height: 0;
+        min-height: 470px;
     }
 
-    .right-panel {
+    .trade-panel .ant-tabs-nav {
+        margin-bottom: 16px;
+    }
+
+    .trade-panel .ant-tabs-tab {
+        color: var(--text-secondary);
+    }
+
+    .trade-panel .ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: var(--color-primary) !important;
+    }
+
+    .ant-slider-track {
+        background-color: var(--color-primary) !important;
+    }
+
+    .trade-panel .ant-tabs-ink-bar {
+        background: var(--color-primary);
+    }
+
+    .trade-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .trade-panel-header .avbl {
+        color: var(--text-secondary);
+    }
+
+    .trade-panel-header .avbl .value {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .trade-panel-header .leverage-actions {
+        display: flex;
+        gap: 4px;
+    }
+
+    .trade-panel-header .leverage-actions .ant-btn {
+        padding: 0 8px;
+        font-size: 12px;
+        background-color: var(--background-panel);
+        border-color: var(--border-color);
+    }
+
+    .trade-panel-input-group {
+        position: relative;
+        margin-bottom: 12px;
+    }
+
+    .trade-panel-input-group .ant-input-number {
+        width: 100%;
+        background-color: var(--background-panel);
+        border-color: var(--border-color);
+    }
+
+    .trade-panel-input-group .input-label {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        pointer-events: none;
+    }
+
+    .trade-panel-input-group .ant-input-number-input {
+        padding-left: 50px;
+    }
+
+    .trade-panel-input-group .input-suffix {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+    }
+
+    .trade-panel .ant-slider {
+        margin: 8px 0 16px 0;
+    }
+
+    .trade-options {
         display: flex;
         flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
     }
 
-    .ticker-bar {
-        overflow-x: auto;
-        white-space: nowrap;
+    .trade-options .ant-checkbox-wrapper {
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
+    .trade-options .hidden-order-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .trade-info {
+        border-top: 1px solid var(--border-color);
+        padding-top: 12px;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .trade-info-row {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-secondary);
+    }
+
+    .trade-info-row .value {
+        color: var(--text-primary);
+    }
+
+    /* --- Account Panel --- */
+    .account-panel {
+        background-color: var(--background-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+
+    .account-panel .panel-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0 0 8px 0;
+        color: var(--text-primary);
+    }
+
+    .account-panel .account-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+    }
+
+    .account-panel .account-actions .ant-btn {
+        background: var(--background-panel);
+        border-color: var(--border-color);
+        color: var(--text-secondary);
+    }
+
+    .account-panel .account-actions .ant-btn:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
+
+    .account-panel .account-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    .account-panel .info-row {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-secondary);
+    }
+
+    .account-panel .info-row .value {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .account-panel .info-row .value.green {
+        color: var(--color-green);
+    }
+
+    .account-panel .multi-asset-btn {
+        margin-top: 12px;
+        background: var(--background-panel);
+        border-color: var(--border-color);
+        color: var(--text-secondary);
+    }
+
+    .account-panel .multi-asset-btn:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
+
+    /* --- Shared Modal Styles --- */
+    .ant-modal-content {
+        background-color: var(--background-surface) !important;
+        color: var(--text-primary) !important;
+        border-radius: 8px !important;
+    }
+
+    .ant-modal-header {
+        background-color: var(--background-surface) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        border-radius: 8px 8px 0 0 !important;
+    }
+
+    .ant-modal-title {
+        color: var(--text-primary) !important;
+    }
+
+    .ant-modal-close-x {
+        color: var(--text-secondary) !important;
+    }
+
+    /* --- Deposit Modal --- */
+    .deposit-modal .ant-tabs-tab {
+        color: var(--text-secondary);
+    }
+
+    .deposit-modal .ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: var(--color-primary) !important;
+    }
+
+    .deposit-modal .ant-tabs-ink-bar {
+        background: var(--color-primary);
+    }
+
+    .deposit-modal .deposit-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 0px;
+    }
+
+    .deposit-form .ant-select-single {
+        font-size: 14px;
+        height: 48px;
+    }
+
+    .deposit-form .ant-input-number-input-wrap {
+        height: 100% !important;
+    }
+
+    .deposit-modal .ant-select-selector {
+        height: 48px !important;
+        padding: 0 16px !important;
+        align-items: center;
+        background-color: var(--background-panel) !important;
+        border: 1px solid var(--border-color-input) !important;
+        border-radius: 6px !important;
+    }
+
+    .deposit-modal .amount-input-group {
+        display: flex;
+        align-items: center;
+        background-color: var(--background-panel);
+        border: 1px solid var(--border-color-input);
+        border-radius: 6px;
+        padding-left: 16px;
+        height: 48px;
+        transition: all 0.3s;
+    }
+
+    .deposit-modal .amount-input-group:focus-within {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
+    }
+
+    .deposit-modal .amount-placeholder {
+        color: var(--text-tertiary);
+        margin-right: 8px;
+    }
+
+    .deposit-modal .amount-input-group .ant-input-number {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    .deposit-modal .amount-input-group .ant-input-number-input {
+        text-align: right;
+        height: 100%;
+    }
+
+    .deposit-modal .amount-input-group .ant-select {
+        width: auto;
+    }
+
+    .deposit-modal .amount-input-group .ant-select-selector {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        height: auto !important;
+    }
+
+    .deposit-modal .balance-info {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-secondary);
+        font-size: 13px;
+    }
+
+    .deposit-modal .connect-wallet-btn {
+        margin-top: 14px;
+        height: 48px;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        font-size: 16px;
+
+    }
+
+    .ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: var(--color-primary) !important;
+    }
+
+    .ant-tabs-tab-btn:hover {
+        color: var(--color-primary) !important;
+    }
+
+    .deposit-modal .connect-wallet-btn:hover {
+        background-color: var(--color-primary) !important;
+        border-color: var(--color-primary) !important;
+        opacity: 0.9;
+    }
+
+    /* --- Transfer Modal --- */
+    .transfer-modal .transfer-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 24px;
+    }
+
+    .transfer-modal .transfer-direction {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .transfer-modal .transfer-box {
+        border: 1px solid var(--border-color-input);
+        background-color: var(--background-panel);
+        border-radius: 6px;
+        padding: 12px 16px;
+        width: 42%;
+        text-align: center;
+    }
+
+    .transfer-modal .transfer-box .label {
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .transfer-modal .transfer-box .value {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .transfer-modal .transfer-swap-icon {
+        font-size: 18px;
+        color: var(--color-primary);
+        cursor: pointer;
+    }
+
+    .transfer-modal .amount-input-group {
+        display: flex;
+        align-items: center;
+        background-color: var(--background-panel);
+        border: 1px solid var(--border-color-input);
+        border-radius: 6px;
+        padding-left: 16px;
+        height: 48px;
+        transition: all 0.3s;
+    }
+
+    .transfer-modal .amount-input-group:focus-within {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
+    }
+
+    .transfer-modal .info-line {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-secondary);
+        font-size: 13px;
+    }
+
+    .transfer-modal .transfer-btn {
+        margin-top: 24px;
+        height: 48px;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        font-size: 16px;
+    }
+
+    /* --- Asset Mode Modal --- */
+    .asset-mode-modal .modal-body {
+        padding-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .asset-mode-modal .asset-option {
+        border: 1px solid var(--border-color-input);
+        border-radius: 8px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .asset-mode-modal .asset-option.selected {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2);
+    }
+
+    .asset-mode-modal .option-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .asset-mode-modal .option-title {
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .asset-mode-modal .option-description {
+        font-size: 13px;
+        color: var(--text-secondary);
+        padding-left: 36px;
+        /* Align with title */
+        margin-top: 8px;
+    }
+
+    .asset-mode-modal .read-more {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 16px;
+    }
+
+    .asset-mode-modal .read-more a {
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+
+    .asset-mode-modal .ant-modal-footer {
+        border-top: 1px solid var(--border-color);
+        padding-top: 16px;
+        margin-top: 24px;
+    }
+
+    .asset-mode-modal .ant-btn-primary[disabled] {
+        background-color: var(--color-disabled) !important;
+        border-color: var(--color-disabled) !important;
+        color: #fff !important;
+    }
+
+    /* --- Margin Mode Modal --- */
+    .margin-mode-modal .modal-body {
+        padding-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .margin-mode-modal .mode-options {
+        display: flex;
+        gap: 12px;
+    }
+
+    .margin-mode-modal .mode-option {
+        flex: 1;
+        border: 1px solid var(--border-color-input);
+        border-radius: 6px;
+        padding: 12px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s;
+    }
+
+    .margin-mode-modal .mode-option.selected {
+        border-color: var(--color-primary);
+    }
+
+    .margin-mode-modal .mode-option .anticon-check {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        color: var(--color-primary);
+    }
+
+    .margin-mode-modal .description {
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .margin-mode-modal .note {
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
+    .margin-mode-modal .connect-wallet-btn {
+        margin-top: 24px;
+        height: 48px;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        font-size: 16px;
+    }
+
+    /* --- Adjust Leverage Modal --- */
+    .adjust-leverage-modal .modal-body {
+        padding-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .adjust-leverage-modal .leverage-label {
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+
+    .adjust-leverage-modal .leverage-input-wrapper {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--border-color-input);
+        border-radius: 6px;
+    }
+
+    .adjust-leverage-modal .leverage-input-wrapper .ant-btn {
+        border: none;
+        font-size: 16px;
+        color: var(--text-secondary);
+    }
+
+    .adjust-leverage-modal .leverage-input-wrapper .ant-input-number {
+        flex-grow: 1;
+        border: none;
+        text-align: center;
+        box-shadow: none !important;
+    }
+
+    .adjust-leverage-modal .leverage-input-wrapper .ant-input-number-input {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .adjust-leverage-modal .ant-slider {
         margin: 0 8px;
     }
 
-    .app-header .desktop-menu {
-        display: none;
+    .adjust-leverage-modal .info-text {
+        font-size: 13px;
+        color: var(--text-secondary);
     }
 
-    .mobile-menu-button {
-        display: block;
+    .adjust-leverage-modal .info-text .value {
+        color: var(--text-primary);
+        font-weight: 500;
     }
 
-    .ant-table {
-        overflow-x: auto;
-    }
-}
-
-@media (max-width: 768px) {
-    .ant-table {
-        overflow-x: auto;
+    .adjust-leverage-modal .note {
+        font-size: 13px;
+        color: var(--text-secondary);
     }
 
-    .chart-container {
-        min-height: 350px;
+    .adjust-leverage-modal .connect-wallet-btn {
+        margin-top: 16px;
+        height: 48px;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        font-size: 16px;
+    }
+
+    /* --- Bottom Panel --- */
+    .bottom-panel {
+        grid-area: positions;
+        background-color: var(--background-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        min-height: 360px;
+    }
+
+    .bottom-panel .ant-table {
+        background: transparent;
+    }
+
+    .bottom-panel .ant-table-thead>tr>th {
+        background: var(--background-panel);
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-secondary);
+    }
+
+    .bottom-panel .ant-table-tbody>tr>td {
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-primary);
+    }
+
+    .bottom-panel .ant-table-tbody>tr.ant-table-row:hover>td {
+        background: var(--background-light);
+    }
+
+    /* --- Footer --- */
+    .app-footer {
+        background-color: var(--background-surface);
+        border-top: 1px solid var(--border-color);
+        padding: 0 10px;
+        height: 30px;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .footer-ticker {
+        display: inline-block;
+        animation: marquee 40s linear infinite;
+    }
+
+    .footer-ticker-item {
+        display: inline-block;
+        margin-right: 30px;
+        font-size: 12px;
+    }
+
+    .spot-trade-panel {
+        background-color: var(--background-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .spot-trade-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 16px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: var(--text-secondary);
+        position: relative;
+    }
+
+    .tab-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+    }
+
+    .tab-btn.active.buy {
+        color: var(--color-green);
+    }
+
+    .tab-btn.active.sell {
+        color: var(--color-red);
+    }
+
+    .tab-btn.active.buy::after {
+        background-color: var(--color-green);
+    }
+
+    .tab-btn.active.sell::after {
+        background-color: var(--color-red);
+    }
+
+    .panel-content .ant-tabs-nav {
+        margin: 0 0 16px 0;
+    }
+
+    .avbl-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .input-group .input-label {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        pointer-events: none;
+    }
+
+    .input-group .ant-input {
+        background-color: var(--background-panel);
+        border-color: var(--border-color);
+        height: 40px;
+    }
+
+    .asset-selector {
+        position: absolute;
+        right: 2px;
+        top: 4px;
+        bottom: 0px;
+        border: none;
+        background-color: var(--background-panel);
+        border-radius: 12px;
+    }
+
+    .asset-selector .ant-select-selector {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--text-tertiary);
+        margin-bottom: 16px;
+    }
+
+    .deposit-btn {
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+        background-color: #f0be84;
+        border-color: transparent;
+        color: #fff;
+        font-weight: 500;
+    }
+
+
+
+    .deposit-btn:hover {
+        background-color: #f0be84 !important;
+        opacity: 0.9;
+    }
+
+
+    .info-row-bottom {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 12px;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .main-content {
+            grid-template-columns: 1fr 320px;
+            grid-template-rows: auto auto auto;
+            grid-template-areas:
+                "chart trade"
+                "book trade"
+                "positions positions";
+            overflow-y: auto;
+        }
+
+        .right-panel {
+            grid-template-rows: min-content auto;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticker-bar {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin: 0;
+        }
+
+        .app-header .desktop-menu {
+            display: none;
+        }
+
+        .mobile-menu-button {
+            display: block;
+        }
+
+        .ant-table {
+            overflow-x: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ant-table {
+            overflow-x: auto;
+        }
+
+        .chart-container {
+            min-height: 350px;
+        }
     }
 }

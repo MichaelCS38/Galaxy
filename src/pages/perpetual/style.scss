@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding-top: 70px;
+    padding-top: 67px;
     max-width: 2440px;
     margin: 0 auto;
 }
@@ -75,19 +75,21 @@
     align-items: center;
     gap: 28px;
     flex-shrink: 0;
-    margin: 0 10px;
+    margin: 0;
     border-radius: 4px;
+    height: 60px;
 }
 
 .ticker-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 5px;
 }
 
 .ticker-label {
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .ticker-value {
@@ -113,8 +115,8 @@
     grid-template-areas:
         "chart book trade"
         "positions positions trade";
-    gap: 8px;
-    padding: 8px;
+    gap: 2px;
+    padding: 2px;
     overflow-y: auto;
     /* Allow vertical scrolling */
     min-height: 0;
@@ -127,7 +129,7 @@
     grid-area: trade;
     display: grid;
     grid-template-rows: 1fr auto;
-    gap: 8px;
+    gap: 2px;
     min-height: 0;
 }
 
@@ -135,11 +137,14 @@
 .chart-container {
     grid-area: chart;
     background-color: var(--background-surface);
-    border: 1px solid var(--border-color);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     min-height: 470px;
+}
+
+.ant-tabs-tab {
+    color: var(--text-secondary) !important;
 }
 
 .chart-toolbar {
@@ -210,12 +215,20 @@
     background-color: transparent;
 }
 
+.ant-tabs-nav::before {
+    border-bottom: 1px solid #e0e0e033 !important;
+}
+
+.ant-tabs .ant-tabs-ink-bar {
+    background: transparent !important;
+}
+
 .order-book-icon:hover {
     background-color: var(--background-surface);
 }
 
 .order-book-icon.active {
-    background-color: var(--color-primary);
+    background-color: var(--text-secondary) !important;
 }
 
 .order-book-icon.active svg {
@@ -375,11 +388,12 @@
     gap: 4px;
 }
 
-.trade-panel-header .leverage-actions .ant-btn {
+.trade-panel-header .leverage-actions div {
     padding: 0 8px;
-    font-size: 12px;
-    background-color: var(--background-panel);
-    border-color: var(--border-color);
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .trade-panel-input-group {
@@ -398,7 +412,7 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-secondary);
+    color: #bbb;
     pointer-events: none;
 }
 
@@ -481,14 +495,15 @@
 }
 
 .account-panel .account-actions .ant-btn {
-    background: var(--background-panel);
-    border-color: var(--border-color);
-    color: var(--text-secondary);
+    background: #000 !important;
+    border-color: #bbbbbb1d !important;
+    color: var(--text-secondary) !important;
 }
 
 .account-panel .account-actions .ant-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+    border-color: #bbbbbb1d !important;
+    color: #f0be84 !important;
+    background: #000 !important;
 }
 
 .account-panel .account-info {
@@ -516,14 +531,15 @@
 
 .account-panel .multi-asset-btn {
     margin-top: 12px;
-    background: var(--background-panel);
-    border-color: var(--border-color);
+    background: #000 !important;
+    border-color: #bbbbbb1d !important;
     color: var(--text-secondary);
 }
 
 .account-panel .multi-asset-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+    color: var(--color-primary) !important;
+    background: #000 !important;
+    border-color: transparent !important;
 }
 
 /* --- Shared Modal Styles --- */
@@ -640,9 +656,9 @@
 
 .deposit-modal .connect-wallet-btn {
     margin-top: 14px;
-    height: 48px;
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+    height: 40px;
+    background-color: #000;
+    border-color: #22222236 !important;
     font-size: 16px;
 
 }
@@ -656,8 +672,8 @@
 }
 
 .deposit-modal .connect-wallet-btn:hover {
-    background-color: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
+    background-color: #000 !important;
+    border-color: #22222236 !important;
     opacity: 0.9;
 }
 
@@ -685,8 +701,13 @@
 }
 
 .transfer-modal .transfer-box .label {
-    font-size: 12px;
-    color: var(--text-secondary);
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+}
+
+.ant-slider-rail {
+    background-color: #bbbbbb36 !important;
 }
 
 .transfer-modal .transfer-box .value {
@@ -726,8 +747,8 @@
 
 .transfer-modal .transfer-btn {
     margin-top: 24px;
-    height: 48px;
-    background-color: var(--color-primary);
+    height: 40px;
+    background-color: #000;
     border-color: var(--color-primary);
     font-size: 16px;
 }
@@ -843,8 +864,8 @@
 
 .margin-mode-modal .connect-wallet-btn {
     margin-top: 24px;
-    height: 48px;
-    background-color: var(--color-primary);
+    height: 40px;
+    background-color: #000;
     border-color: var(--color-primary);
     font-size: 16px;
 }
@@ -907,10 +928,14 @@
     color: var(--text-secondary);
 }
 
+.ant-input::placeholder {
+    color: #fff !important;
+}
+
 .adjust-leverage-modal .connect-wallet-btn {
     margin-top: 16px;
-    height: 48px;
-    background-color: var(--color-primary);
+    height: 40px;
+    background-color: #000;
     border-color: var(--color-primary);
     font-size: 16px;
 }
@@ -921,6 +946,7 @@
     background-color: var(--background-surface);
     border: 1px solid var(--border-color);
     border-radius: 4px;
+    min-height: 360px;
 }
 
 .bottom-panel .ant-table {
@@ -928,9 +954,23 @@
 }
 
 .bottom-panel .ant-table-thead>tr>th {
-    background: var(--background-panel);
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    background: var(--background-surface) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+.ant-table-placeholder {
+    background: var(--background-surface) !important;
+
+    &:hover {
+        background: var(--background-surface) !important;
+    }
+}
+
+.ant-input-outlined {
+    background: #191919 !important;
+    border-color: #bbbbbb36 !important;
+    color: #fff;
 }
 
 .bottom-panel .ant-table-tbody>tr>td {
@@ -963,6 +1003,10 @@
     display: inline-block;
     margin-right: 30px;
     font-size: 12px;
+
+    span {
+        color: #fff;
+    }
 }
 
 @keyframes marquee {
@@ -1005,7 +1049,7 @@
     .ticker-bar {
         overflow-x: auto;
         white-space: nowrap;
-        margin: 0 8px;
+        margin: 0;
     }
 
     .app-header .desktop-menu {
