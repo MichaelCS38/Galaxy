@@ -579,13 +579,13 @@
 .deposit-modal .deposit-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px !important;
     margin-top: 0px;
 }
 
 .deposit-form .ant-select-single {
     font-size: 14px;
-    height: 48px;
+    height: 40px;
 }
 
 .deposit-form .ant-input-number-input-wrap {
@@ -593,7 +593,7 @@
 }
 
 .deposit-modal .ant-select-selector {
-    height: 48px !important;
+    height: 40px !important;
     padding: 0 16px !important;
     align-items: center;
     background-color: var(--background-panel) !important;
@@ -608,7 +608,7 @@
     border: 1px solid var(--border-color-input);
     border-radius: 6px;
     padding-left: 16px;
-    height: 48px;
+    height: 40px;
     transition: all 0.3s;
 }
 
@@ -655,7 +655,7 @@
 }
 
 .deposit-modal .connect-wallet-btn {
-    margin-top: 14px;
+    margin-top: 4px;
     height: 40px;
     background-color: #000;
     border-color: #22222236 !important;
@@ -695,7 +695,7 @@
     border: 1px solid var(--border-color-input);
     background-color: var(--background-panel);
     border-radius: 6px;
-    padding: 12px 16px;
+    padding: 6px 12px;
     width: 42%;
     text-align: center;
 }
@@ -729,7 +729,7 @@
     border: 1px solid var(--border-color-input);
     border-radius: 6px;
     padding-left: 16px;
-    height: 48px;
+    height: 40px;
     transition: all 0.3s;
 }
 
@@ -751,6 +751,20 @@
     background-color: #000;
     border-color: var(--color-primary);
     font-size: 16px;
+
+    &:hover {
+        background-color: #000 !important;
+        border-color: #000 !important;
+        opacity: 0.9;
+    }
+}
+
+.ant-dropdown-trigger {
+    color: #fff;
+
+    &:hover {
+        color: #fff;
+    }
 }
 
 /* --- Asset Mode Modal --- */

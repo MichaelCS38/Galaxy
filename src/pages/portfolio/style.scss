@@ -15,6 +15,7 @@
      font-size: 28px;
      font-weight: 500;
      margin: 0 0 8px 0;
+     color: #fff;
  }
 
  .portfolio-header .ant-tabs-nav {
@@ -33,7 +34,7 @@
  .portfolio-grid {
      display: grid;
      grid-template-columns: 300px 1fr;
-     gap: 16px;
+     gap: 12px;
      grid-template-areas:
          "balance pnl"
          "products pnl"
@@ -44,7 +45,7 @@
      background-color: var(--background-surface);
      border: 1px solid var(--border-color);
      border-radius: 8px;
-     padding: 24px;
+     padding: 12px;
  }
 
  .account-balance-card {
@@ -67,7 +68,7 @@
      display: flex;
      justify-content: space-between;
      font-size: 14px;
-     margin-bottom: 8px;
+     margin-bottom: 4px;
  }
 
  .pnl-info .info-row .value {
