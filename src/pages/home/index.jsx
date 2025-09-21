@@ -359,7 +359,7 @@ const FeaturesSection = () => {
             description: 'Use powerful tools like hidden orders — built for control, speed, and a competitive edge.'
         },
         {
-            icon: <img style={{ width: '60px', height: "60px", borderRadius: "99px" }} src="/images/logo-bapy.jpeg" alt="Icon 1" />,
+            icon: <img style={{ width: '70px', height: "70px", borderRadius: "9px" }} src="/images/tay3.png" alt="Icon 1" />,
             title: 'Confidence in every trade',
             description: 'Whether you’re new or a pro, enjoy a streamlined experience built for clarity and control.'
         },
@@ -395,9 +395,9 @@ const FeaturesSection = () => {
 const PartnersSection = () => {
     const partners = [
         { src: "https://four.meme/_next/static/media/logo.fd63b04b.svg", alt: "" },
-        { src: '/images/bnb.png', alt: "" },
+        { src: '/images/bnb1.png', alt: "" },
         { src: "https://cdn.shib.io/shibio/48b3c45acd813c3de4cafda169faba239bdbefdd/public/images/redesign/shibio_logo.svg", alt: "" },
-        { src: '/images/doge.jpeg', alt: "" },
+        { src: '/images/doge.png', alt: "" },
         { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/PancakeSwap.svg", alt: "" },
     ];
     const marqueeItems = [...partners, ...partners];

@@ -533,13 +533,14 @@
 
 .partner-logo {
     max-height: 3.5rem;
-    filter: grayscale(1);
+    filter: grayscale(0);
     transition: all 0.3s;
+    border-radius: 20px;
 }
 
-.partner-logo:hover {
-    filter: grayscale(0);
-}
+// .partner-logo:hover {
+//     filter: grayscale(0);
+// }
 
 /* --- Community Section --- */
 .community-section {
