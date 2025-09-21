@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Tabs, InputNumber, Slider, Checkbox, Table, Dropdown, Menu, Tag, Modal, Select, Input } from 'antd';
-import { DownOutlined, AppstoreOutlined, ArrowUpOutlined, PlusCircleOutlined, InfoCircleOutlined, SwapOutlined, CheckOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import { DownOutlined, AppstoreOutlined, ArrowUpOutlined, PlusCircleOutlined, InfoCircleOutlined, SwapOutlined, CheckOutlined, PlusOutlined, MinusOutlined, UpOutlined } from '@ant-design/icons';
+import { useParams, useNavigate } from 'react-router-dom';
 import ChartPage from './chart';
 import { useTrading } from '../../contexts/TradingContext';
 import './style.scss';
@@ -67,9 +68,12 @@ const AppHeader = () => (
 
 const Ticker = () => {
     const { selectedPair, setSelectedPair, availablePairs } = useTrading();
+    const navigate = useNavigate();
 
     const handlePairChange = (pair: any) => {
         setSelectedPair(pair);
+        // Cập nhật URL khi chọn pair mới
+        navigate(`/perpetual/v1/${pair.symbol}`);
     };
 
     const pairMenu = (
@@ -120,6 +124,7 @@ const Ticker = () => {
         </div>
     );
 };
+
 
 
 const TradingChart = () => {
@@ -192,12 +197,19 @@ const OrderBook = () => {
                                 }}
                                 title="Show both buy and sell orders"
                             >
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <rect x="2" y="2" width="12" height="6" stroke={showBuys && showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
-                                    <rect x="2" y="10" width="12" height="6" stroke={showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
-                                    <line x1="14" y1="4" x2="16" y2="4" stroke="#8c8c8c" strokeWidth="1" />
-                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1" />
-                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1" />
+                                <svg
+                                    width={24}
+                                    height={24}
+                                    viewBox="0 0 28 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+
+                                >
+                                    <rect x="0.5" y="0.5" width="9" height="9" rx="1.5" stroke="#2DD4BF" />
+                                    <rect x="0.5" y="12.5" width="9" height="9" rx="1.5" stroke="#F97316" />
+                                    <rect x="14" y="1" width="14" height="4" rx="2" fill="#808080" />
+                                    <rect x="14" y="9" width="14" height="4" rx="2" fill="#808080" />
+                                    <rect x="14" y="17" width="14" height="4" rx="2" fill="#808080" />
                                 </svg>
                             </div>
                             <div
@@ -208,11 +220,17 @@ const OrderBook = () => {
                                 }}
                                 title="Show only buy orders"
                             >
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <rect x="2" y="4" width="12" height="8" stroke={showBuys && !showSells ? "#1890ff" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
-                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1" />
-                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1" />
-                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1" />
+                                <svg
+                                    width={24}
+                                    height={24}
+                                    viewBox="0 0 28 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect x="0.5" y="0.5" width="9" height="21" rx="1.5" stroke="#2DD4BF" />
+                                    <rect x="14" y="1" width="14" height="4" rx="2" fill="#808080" />
+                                    <rect x="14" y="9" width="14" height="4" rx="2" fill="#808080" />
+                                    <rect x="14" y="17" width="14" height="4" rx="2" fill="#808080" />
                                 </svg>
                             </div>
                             <div
@@ -223,11 +241,17 @@ const OrderBook = () => {
                                 }}
                                 title="Show only sell orders"
                             >
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <rect x="2" y="4" width="12" height="8" stroke={!showBuys && showSells ? "#ff4d4f" : "#8c8c8c"} strokeWidth="1" fill="none" rx="1" />
-                                    <line x1="14" y1="6" x2="16" y2="6" stroke="#8c8c8c" strokeWidth="1" />
-                                    <line x1="14" y1="8" x2="16" y2="8" stroke="#8c8c8c" strokeWidth="1" />
-                                    <line x1="14" y1="10" x2="16" y2="10" stroke="#8c8c8c" strokeWidth="1" />
+                                <svg
+                                    width={24}
+                                    height={24}
+                                    viewBox="0 0 28 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect x="0.5" y="0.5" width="9" height="21" rx="1.5" stroke="#F97316" />
+                                    <rect x="14" y="1" width="14" height="4" rx="2" fill="#808080" />
+                                    <rect x="14" y="9" width="14" height="4" rx="2" fill="#808080" />
+                                    <rect x="14" y="17" width="14" height="4" rx="2" fill="#808080" />
                                 </svg>
                             </div>
                         </div>
@@ -778,12 +802,25 @@ const AppFooter = () => {
 
 
 function Perpetual() {
+    const { pair } = useParams();
+    const { selectedPair, setSelectedPair, availablePairs } = useTrading();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    // Load pair từ URL parameter
+    useEffect(() => {
+        if (pair && availablePairs.length > 0) {
+            const foundPair = availablePairs.find(p => p.symbol === pair);
+            if (foundPair && foundPair.symbol !== selectedPair.symbol) {
+                setSelectedPair(foundPair);
+            }
+        }
+    }, [pair, availablePairs, selectedPair.symbol, setSelectedPair]);
     return (
         <>
             <div className="trading-app">

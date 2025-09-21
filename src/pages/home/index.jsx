@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./style.scss"
 
 
@@ -169,6 +170,24 @@ const useTextScramble = (phrases, activeIndex) => {
 // --- CÁC SECTION CỦA TRANG ---
 const HeroSection = () => {
     const typedText = useTypingEffect("rade Crypto", 150, 100, 2000);
+    const navigate = useNavigate();
+
+    const handleLaunchApp = () => {
+        navigate('/perpetual/v1/BTCUSDT');
+    };
+
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (video) {
+            // Ép play bằng JS (fallback khi autoplay bị chặn)
+            video.play().catch(err => {
+                console.log("Autoplay bị chặn, cần user interaction:", err);
+            });
+        }
+    }, []);
+
     return (
         <section className="hero-section">
             <div className="blurry-shape shape-1"></div>
@@ -188,18 +207,31 @@ const HeroSection = () => {
                         Non-custodial trading built for all — whether you're new to crypto or a seasoned pro.
                     </p>
                     <div className="hero-buttons">
-                        <button className="btn btn-primary">Launch App</button>
+                        <button className="btn btn-primary" onClick={handleLaunchApp}>Launch App</button>
                         <button className="btn btn-secondary">Download app </button>
                     </div>
                 </div>
                 <div className="hero-animation">
+                    {/* <video controls autoplay loop>
+                        <source src="/images/banner.MP4" type="video/mp4" />
+                    </video> */}
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                    >
+                        <source src="/images/video.mp4" type="video/mp4" />
+                    </video>
+                </div>
+
+                {/* <div className="hero-animation">
                     <div className="sphere-3d-container">
                         <div className="sphere-core">
                             <div className="sphere-glow"></div>
                             <img src='/images/logo-bapy.jpeg'
                                 alt="Logo" className="sphere-logo" />
-                            {/* <img src="https://placehold.co/100x100/fff5f7/f61f77?text=BABY SHIBA"
-                             alt="Logo" className="sphere-logo" /> */}
                         </div>
                         <div className="sphere-orbit orbit-1">
                             <div className="sphere-satellite"></div>
@@ -214,7 +246,7 @@ const HeroSection = () => {
                             <div className="sphere-satellite"></div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     );
@@ -361,13 +393,11 @@ const FeaturesSection = () => {
 };
 const PartnersSection = () => {
     const partners = [
-        { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/Venus.svg", alt: "" },
-        { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/Kernel.svg", alt: "" },
-        { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/ListaDAO.svg", alt: "" },
-        { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/YZi_labs.svg", alt: "" },
-        { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/Pendle.svg", alt: "" },
+        { src: "https://four.meme/_next/static/media/logo.fd63b04b.svg", alt: "" },
+        { src: '/images/bnb.png', alt: "" },
+        { src: "https://cdn.shib.io/shibio/48b3c45acd813c3de4cafda169faba239bdbefdd/public/images/redesign/shibio_logo.svg", alt: "" },
+        { src: '/images/doge.jpeg', alt: "" },
         { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/PancakeSwap.svg", alt: "" },
-        { src: "https://static.asterdex.com/cloud-futures/static/images/aster/partners/Hyperbot.svg", alt: "" },
     ];
     const marqueeItems = [...partners, ...partners];
     return (
@@ -388,6 +418,12 @@ const PartnersSection = () => {
     );
 };
 const CommunitySection = () => {
+    const navigate = useNavigate();
+
+    const handleLaunchApp = () => {
+        navigate('/perpetual/v1/BTCUSDT');
+    };
+
     return (
         <section className="community-section">
             <div className="container community-container">
@@ -398,7 +434,7 @@ const CommunitySection = () => {
                     <span>Baby Shiba</span>
                 </div>
                 <div className="community-buttons">
-                    <button className="btn btn-primary btn-icon">
+                    <button className="btn btn-primary btn-icon" onClick={handleLaunchApp}>
                         Launch app <ArrowRightIcon />
                     </button>
                     <button className="btn btn-dark btn-icon">

@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Tabs, InputNumber, Slider, Checkbox, Table, Dropdown, Menu, Tag, Modal, Select, Input } from 'antd';
-import { DownOutlined, AppstoreOutlined, ArrowUpOutlined, PlusCircleOutlined, InfoCircleOutlined, SwapOutlined, CheckOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons';
+import { DownOutlined, AppstoreOutlined, ArrowUpOutlined, PlusCircleOutlined, InfoCircleOutlined, SwapOutlined, CheckOutlined, PlusOutlined, MinusOutlined, UpOutlined } from '@ant-design/icons';
+import { useParams, useNavigate } from 'react-router-dom';
 import ChartPage from './chart';
 import { useTrading } from '../../contexts/TradingContext';
 import './style.scss';
@@ -57,19 +58,22 @@ const assetsColumns = [
 
 const Ticker = () => {
     const { selectedPair, setSelectedPair, availablePairs } = useTrading();
+    const navigate = useNavigate();
 
     const handlePairChange = (pair: any) => {
         setSelectedPair(pair);
+        // Cập nhật URL khi chọn pair mới
+        navigate(`/spot/v1/${pair.symbol}`);
     };
 
-    const pairMenu = (
+const pairMenu = (
         <Menu>
             {availablePairs.map((pair) => (
                 <Menu.Item key={pair.symbol} onClick={() => handlePairChange(pair)}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <img src={pair.icon} alt={pair.name} width="20" />
                         <span>{pair.name}</span>
-                        <span style={{ color: 'var(--text-secondary)' }}>{pair.symbol}</span>
+
                     </div>
                 </Menu.Item>
             ))}
@@ -825,12 +829,25 @@ const AppFooter = () => {
 
 
 function Spot() {
+    const { pair } = useParams();
+    const { selectedPair, setSelectedPair, availablePairs } = useTrading();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    // Load pair từ URL parameter
+    useEffect(() => {
+        if (pair && availablePairs.length > 0) {
+            const foundPair = availablePairs.find(p => p.symbol === pair);
+            if (foundPair && foundPair.symbol !== selectedPair.symbol) {
+                setSelectedPair(foundPair);
+            }
+        }
+    }, [pair, availablePairs, selectedPair.symbol, setSelectedPair]);
     return (
         <>
             <div className="trading-app spot-page">

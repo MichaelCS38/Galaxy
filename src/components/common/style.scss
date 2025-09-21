@@ -8,6 +8,12 @@
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
     border-bottom: 1px solid #ff4d4f;
 
+    .header__right {
+        .ant-dropdown-trigger {
+            color: #000 !important;
+        }
+    }
+
     .menu-item-icon {
         display: flex;
         align-items: center;

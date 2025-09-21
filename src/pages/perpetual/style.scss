@@ -228,12 +228,9 @@
 }
 
 .order-book-icon.active {
-    background-color: var(--text-secondary) !important;
+    background-color: #191919 !important;
 }
 
-.order-book-icon.active svg {
-    filter: brightness(0) invert(1);
-}
 
 .precision-selector {
     display: flex;
@@ -1078,6 +1075,7 @@
         overflow-x: auto;
     }
 }
+
 
 @media (max-width: 768px) {
     .ant-table {

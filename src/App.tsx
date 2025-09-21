@@ -74,13 +74,15 @@ function App() {
             <Main>
               <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/perpetual' element={<Perpetual />} />
+                <Route path='/perpetual' element={<Navigate to='/perpetual/v1/BTCUSDT' replace />} />
+                <Route path='/perpetual/v1/:pair' element={<Perpetual />} />
                 <Route path='/portfolio' element={<PortfolioPage />} />
                 <Route path='/referral' element={<ReferralPage />} />
-                <Route path='/spot' element={<Spot />} />
+                <Route path='/spot' element={<Navigate to='/spot/v1/BTCUSDT' replace />} />
+                <Route path='/spot/v1/:pair' element={<Spot />} />
 
                 {/* <Route path='/token/:id' element={<DetailPage />} /> */}
-                <Route path="*" element={<Navigate to='/' replace />} />
+                {/* <Route path="*" element={<Navigate to='/' replace />} /> */}
               </Routes>
             </Main>
           </TradingProvider>
