@@ -1,17 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Tabs, InputNumber, Slider, Checkbox, Table, Dropdown, Menu, Tag, Modal, Select, Input } from 'antd';
+import { Button, Tabs, InputNumber, Slider, Checkbox, Table, Dropdown, Menu, Tag, Modal, Select, Input, Collapse } from 'antd';
 import { DownOutlined, AppstoreOutlined, ArrowUpOutlined, PlusCircleOutlined, InfoCircleOutlined, SwapOutlined, CheckOutlined, PlusOutlined, MinusOutlined, UpOutlined } from '@ant-design/icons';
 import { useParams, useNavigate } from 'react-router-dom';
 import ChartPage from './chart';
 import { useTrading } from '../../contexts/TradingContext';
 import './style.scss';
-
-// --- CSS IN-LINE ---
-
-
-
-// --- Data Generation ---
 
 const positionsColumns = [
     { title: 'Symbol', dataIndex: 'symbol', key: 'symbol' },
@@ -44,28 +38,6 @@ const assetsColumns = [
 
 // --- Components ---
 
-const AppHeader = () => (
-    <header className="app-header">
-        <div className="logo">BABYSHIB</div>
-        <Menu mode="horizontal" defaultSelectedKeys={['market']}>
-            <Menu.Item key="market">Market</Menu.Item>
-            <Menu.Item key="spot">Spot</Menu.Item>
-            <Menu.Item key="portfolio">Portfolio</Menu.Item>
-            <Menu.Item key="referral">Referral</Menu.Item>
-            <Menu.SubMenu key="more" title="More">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-            </Menu.SubMenu>
-        </Menu>
-        <div className="header-actions">
-            <Button type="primary" ghost style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}>
-                <AppstoreOutlined /> Airdrop
-            </Button>
-            <Button type="primary" style={{ backgroundColor: 'var(--color-primary)', borderColor: 'var(--color-primary)', color: 'var(--text-primary-on-pink)' }}>Connect wallet</Button>
-        </div>
-    </header>
-);
-
 const Ticker = () => {
     const { selectedPair, setSelectedPair, availablePairs } = useTrading();
     const navigate = useNavigate();
@@ -75,6 +47,13 @@ const Ticker = () => {
         // Cập nhật URL khi chọn pair mới
         navigate(`/perpetual/v1/${pair.symbol}`);
     };
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const pairMenu = (
         <Menu>
@@ -90,7 +69,65 @@ const Ticker = () => {
         </Menu>
     );
 
-    return (
+    const MobileTicker = (
+        <div className="ticker-bar-mobile">
+            <Collapse ghost expandIconPosition="end" className="ticker-collapse">
+                <Collapse.Panel
+                    key="1"
+                    header={
+                        <div className="mobile-ticker-header">
+                            <Dropdown
+                                overlay={pairMenu}
+                                trigger={['click']}
+
+                            >
+                                <a
+                                    className="ticker-dropdown-link"
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                    }}
+                                >
+                                    <img src={selectedPair.icon} alt={selectedPair.name} width="24" height="24" />
+                                    <div className="mobile-pair-info">
+                                        <span className="ticker-pair-symbol">{selectedPair.symbol}</span>
+                                        <span className={`ticker-change ${selectedPair.change24h >= 0 ? 'green' : 'red'}`}>
+                                            {selectedPair.change24h >= 0 ? '+' : ''}{selectedPair.change24h}%
+                                        </span>
+                                    </div>
+                                    <DownOutlined style={{ fontSize: '12px' }} />
+                                </a>
+                            </Dropdown>
+
+                            <div className="mobile-price-info">
+                                <div className={`ticker-value ${selectedPair.change24h >= 0 ? 'green' : 'red'}`}>
+                                    {selectedPair.price.toLocaleString()}
+                                </div>
+                                <div className="ticker-label-inline">Mark {selectedPair.markPrice.toLocaleString()}</div>
+                            </div>
+                        </div>
+                    }
+                >
+                    <div className="mobile-ticker-details">
+                        <div className="ticker-item">
+                            <div className="ticker-label">Funding/Countdown</div>
+                            <div className="ticker-value">{selectedPair.fundingRate} / {selectedPair.countdown}</div>
+                        </div>
+                        <div className="ticker-item">
+                            <div className="ticker-label">24h Volume</div>
+                            <div className="ticker-value">{selectedPair.volume24h}</div>
+                        </div>
+                        <div className="ticker-item">
+                            <div className="ticker-label">Open Interest</div>
+                            <div className="ticker-value">{selectedPair.openInterest}</div>
+                        </div>
+                    </div>
+                </Collapse.Panel>
+            </Collapse>
+        </div>
+    );
+
+    const DesktopTicker = (
         <div className="ticker-bar">
             <Dropdown overlay={pairMenu} trigger={['click']}>
                 <a onClick={e => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -122,7 +159,9 @@ const Ticker = () => {
                 <div className="ticker-value">{selectedPair.openInterest}</div>
             </div>
         </div>
-    );
+    )
+
+    return isMobile ? MobileTicker : DesktopTicker;
 };
 
 

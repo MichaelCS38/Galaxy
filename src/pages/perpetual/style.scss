@@ -106,6 +106,111 @@
     color: var(--color-red);
 }
 
+/* --- Ticker Bar (Mobile) --- */
+.ticker-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ticker-bar-mobile {
+    background-color: var(--background-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 16px;
+    border-radius: 4px;
+    // min-height: 64px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ant-collapse-header {
+    align-items: center !important;
+}
+
+.ant-collapse-expand-icon {
+    color: #fff;
+}
+
+.ticker-bar-mobile .ticker-collapse {
+    width: 100%;
+}
+
+/* Override AntD default styles for a seamless look */
+.ticker-bar-mobile .ant-collapse {
+    background-color: transparent;
+    border: none;
+}
+
+.ticker-bar-mobile .ant-collapse>.ant-collapse-item {
+    border-bottom: none !important;
+}
+
+.ticker-bar-mobile .ant-collapse-header {
+    padding: 12px 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-bar-mobile .ant-collapse-content {
+    background-color: transparent;
+    border-top: none;
+}
+
+.ticker-bar-mobile .ant-collapse-content-box {
+    padding: 0 0 16px 0 !important;
+}
+
+.mobile-ticker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.mobile-pair-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mobile-price-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.ticker-label-inline {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.mobile-ticker-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 16px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.mobile-ticker-details .ticker-item {
+    align-items: flex-start;
+}
+
+/* For AntD Dropdown Menu */
+.ant-dropdown-menu {
+    background-color: var(--background-surface) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.ant-dropdown-menu-item {
+    color: var(--text-primary) !important;
+}
+
+.ant-dropdown-menu-item:hover {
+    background-color: var(--border-color) !important;
+}
+
 /* --- Main Content --- */
 .main-content {
     flex-grow: 1;
